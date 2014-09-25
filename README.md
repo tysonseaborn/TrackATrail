@@ -1,4 +1,4 @@
 TrackATrail
 ===========
 
-Personal route tracker mobile app
+Personal Route Tracker for Android
