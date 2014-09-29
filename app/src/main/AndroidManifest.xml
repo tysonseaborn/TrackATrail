@@ -25,6 +25,14 @@
                 android:value="com.example.tyson.trackatrail.TrackATrail" />
         </activity>
         <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".SaveRouteActivity"
+            android:label="@string/title_activity_save_route" >
+        </activity>
+        <activity
             android:name=".StartRouteActivity"
             android:label="@string/title_activity_start_route" >
         </activity>
