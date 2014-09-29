@@ -10,6 +10,8 @@
     <string name="about_becky">Becky Harris</string>
     <string name="about_year">2014</string>
     <string name="title_activity_register">RegisterActivity</string>
+
+    <!-- Register User Strings -->
     <string name="username">Username</string>
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
@@ -18,5 +20,14 @@
     <string name="email">Email</string>
     <string name="signup">Sign Up</string>
     <string name="title_activity_save_route">SaveRouteActivity</string>
+
+    <!-- Save Route Strings -->
+    <string name="routename">Route Name</string>
+    <string name="routedescription">Route Description</string>
+    <string name="routecctivity">Route Activity</string>
+    <string name="routedistance">Route Distance:</string>
+    <string name="routetime">Route Time:</string>
+    <string name="routeSave">Save Route</string>
+
 
 </resources>
