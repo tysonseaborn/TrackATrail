@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="range">
-        <item>Route Example 1</item>
-        <item>Route Example 2</item>
-        <item>Route Example 3</item>
-    </string-array>
-</resources>

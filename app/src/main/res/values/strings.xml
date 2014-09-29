@@ -39,4 +39,12 @@
     <string name="routeSave">Save Route</string>
 
 
+    <!-- Main Menu strings -->
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="mainmenu">TrackATrail Main Menu</string>
+    <string name="myprofile">Profile</string>
+    <string name="myroutes">My Routes</string>
+    <string name="findroutes">Find Routes</string>
+    <string name="mysettings">Settings</string>
+
 </resources>

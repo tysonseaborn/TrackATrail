@@ -40,6 +40,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tyson.trackatrail.TrackATrail" />
         </activity>
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="@string/mainmenu" >
+        </activity>
     </application>
 
 </manifest>

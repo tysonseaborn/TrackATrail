@@ -25,7 +25,8 @@
         android:ems="10"
         android:id="@+id/passwordInput"
         android:layout_below="@+id/usernameInput"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false" />
 
     <Button
         android:layout_width="wrap_content"
