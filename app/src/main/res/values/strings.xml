@@ -9,5 +9,9 @@
     <string name="about_mike">Mike Uetz</string>
     <string name="about_becky">Becky Harris</string>
     <string name="about_year">2014</string>
+    <string name="title_activity_start_route">Start Route</string>
+    <string name="start_route_start_button">Start Tracking</string>
+    <string name="start_route_save_button">Save Route</string>
+    <string name="title_activity_saved_route">Saved Route</string>
 
 </resources>

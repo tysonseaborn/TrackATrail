@@ -24,6 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tyson.trackatrail.TrackATrail" />
         </activity>
+        <activity
+            android:name=".StartRouteActivity"
+            android:label="@string/title_activity_start_route" >
+        </activity>
+        <activity
+            android:name=".SavedRouteActivity"
+            android:label="@string/title_activity_saved_route" >
+        </activity>
     </application>
 
 </manifest>
