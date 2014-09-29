@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class RouteManagerActivity extends Activity {
@@ -13,7 +14,6 @@ public class RouteManagerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_manager);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +32,9 @@ public class RouteManagerActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onButtonClick(View view) {
+        // go to ...
     }
 }

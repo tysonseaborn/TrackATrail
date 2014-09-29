@@ -18,5 +18,10 @@
     <string name="email">Email</string>
     <string name="signup">Sign Up</string>
     <string name="title_activity_save_route">SaveRouteActivity</string>
+    <string name="routemgr_startnewroute">Start New Route</string>
+
+    <!-- Route Manager strings -->
+    <string name="title_activity_route_manager">RouteManagerActivity</string>
+    <string name="route_manager">Route Manager</string>
 
 </resources>

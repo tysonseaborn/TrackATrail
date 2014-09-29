@@ -30,14 +30,26 @@ public class TrackATrail extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_about) {
-            openAbout();
+            openMenu("about");
+            return true;
+        }
+        else if (id == R.id.action_route_manager) {
+            openMenu("routemanager");
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void openAbout() {
-        Intent about = new Intent(this, About.class);
-        startActivity(about);
+    public void openMenu(String menuItem) {
+        if(menuItem == "about") {
+            Intent about = new Intent(this, About.class);
+            startActivity(about);
+        }
+        else if(menuItem == "routemanager") {
+            Intent routemanager = new Intent(this, RouteManagerActivity.class);
+            startActivity(routemanager);
+        }
     }
+
+
 }
