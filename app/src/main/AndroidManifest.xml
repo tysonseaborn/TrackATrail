@@ -28,6 +28,10 @@
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
+        <activity
+            android:name=".SaveRouteActivity"
+            android:label="@string/title_activity_save_route" >
+        </activity>
     </application>
 
 </manifest>
