@@ -26,15 +26,26 @@
         android:id="@+id/passwordInput"
         android:layout_below="@+id/usernameInput"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:id="@+id/imageView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/logoalpha" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign in"
         android:id="@+id/buttonSignin"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/buttonRegister"
+        android:layout_alignRight="@+id/passwordInput"
         android:layout_alignEnd="@+id/passwordInput"
+        android:layout_alignLeft="@+id/passwordInput"
         android:layout_alignStart="@+id/passwordInput" />
 
     <Button
@@ -43,6 +54,7 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/buttonRegister"
-        android:layout_below="@+id/buttonSignin"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="73dp" />
 </RelativeLayout>
