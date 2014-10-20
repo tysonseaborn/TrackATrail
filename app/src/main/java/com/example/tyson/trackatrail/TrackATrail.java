@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class TrackATrail extends Activity {
@@ -48,6 +49,15 @@ public class TrackATrail extends Activity {
         else if(menuItem == "routemanager") {
             Intent routemanager = new Intent(this, RouteManagerActivity.class);
             startActivity(routemanager);
+        }
+    }
+
+
+    public void onButtonClick(View view) {
+        // register button click, go to register page
+        if(view.getId() == R.id.buttonRegister) {
+            Intent i = new Intent(this, RegisterActivity.class);
+            startActivity(i);
         }
     }
 
