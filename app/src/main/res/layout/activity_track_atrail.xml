@@ -16,7 +16,9 @@
         android:id="@+id/usernameInput"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp" />
+        android:layout_marginTop="90dp"
+        android:hint="Username"
+        android:gravity="center" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,7 +29,9 @@
         android:layout_below="@+id/usernameInput"
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false" />
+        android:layout_alignParentRight="false"
+        android:hint="Password"
+        android:gravity="center" />
 
     <ImageView
         android:layout_width="300dp"

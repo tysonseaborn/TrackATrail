@@ -25,10 +25,10 @@
             android:layout_height="25dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/username"
+            android:hint="@string/username"
             android:ems="10"
             android:id="@+id/editText" />
 
@@ -43,20 +43,22 @@
             android:id="@+id/firstname_lastname">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="@string/firstname"
+                android:hint="@string/firstname"
                 android:ems="10"
-                android:id="@+id/editText6" />
+                android:id="@+id/editText6"
+                android:layout_weight="0.5" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="@string/lastname"
+                android:hint="@string/lastname"
                 android:ems="10"
-                android:id="@+id/editText7" />
+                android:id="@+id/editText7"
+                android:layout_weight="0.5" />
 
         </LinearLayout>
 
@@ -70,20 +72,24 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/editText8"
-                android:text="@string/password" />
+                android:hint="@string/password"
+                android:textSize="16dp"
+                android:layout_weight="0.5" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/editText9"
-                android:text="@string/confirmpassword" />
+                android:hint="@string/confirmpassword"
+                android:textSize="16dp"
+                android:layout_weight="0.5" />
 
         </LinearLayout>
 
@@ -95,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/email"
+            android:hint="@string/email"
             android:ems="10"
             android:id="@+id/editText10" />
 
@@ -105,7 +111,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
             android:text="@string/signup"
             android:id="@+id/button" />
 

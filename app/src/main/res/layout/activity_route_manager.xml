@@ -14,6 +14,7 @@
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:weightSum="1">
 
         <ListView
@@ -37,6 +38,7 @@
             android:id="@+id/btnStartNewRoute"
             android:layout_below="@+id/spinner"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_gravity="bottom"
             android:onClick="onButtonClick" />
     </LinearLayout>

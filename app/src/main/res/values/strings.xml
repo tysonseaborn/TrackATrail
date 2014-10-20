@@ -13,7 +13,7 @@
     <string name="start_route_start_button">Start Tracking</string>
     <string name="start_route_save_button">Save Route</string>
     <string name="title_activity_saved_route">Saved Route</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Register</string>
 
     <!-- Register User Strings -->
     <string name="username">Username</string>
@@ -23,11 +23,11 @@
     <string name="confirmpassword">Confirm Password</string>
     <string name="email">Email</string>
     <string name="signup">Sign Up</string>
-    <string name="title_activity_save_route">SaveRouteActivity</string>
+    <string name="title_activity_save_route">Save Route</string>
     <string name="routemgr_startnewroute">Start New Route</string>
 
     <!-- Route Manager strings -->
-    <string name="title_activity_route_manager">RouteManagerActivity</string>
+    <string name="title_activity_route_manager">Route Manager</string>
     <string name="route_manager">Route Manager</string>
 
     <!-- Save Route Strings -->
@@ -40,7 +40,7 @@
 
 
     <!-- Main Menu strings -->
-    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="title_activity_main_menu">Main Menu</string>
     <string name="mainmenu">TrackATrail Main Menu</string>
     <string name="myprofile">Profile</string>
     <string name="myroutes">My Routes</string>

@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/routename"
+            android:hint="@string/routename"
             android:ems="10"
             android:id="@+id/editText" />
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:inputType="textPersonName"
-            android:text="@string/routedescription"
+            android:hint="@string/routedescription"
             android:ems="10"
             android:id="@+id/editText3" />
 
@@ -102,11 +102,11 @@
 
         <Space
             android:layout_width="20px"
-            android:layout_height="50dp" />
+            android:layout_height="30dp" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:text="@string/routeSave"
             android:id="@+id/button" />
 
