@@ -1,9 +1,11 @@
 package com.example.tyson.trackatrail;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class StartRouteActivity extends TrackATrail {
@@ -12,6 +14,18 @@ public class StartRouteActivity extends TrackATrail {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_route);
+    }
+
+    public void onButtonClick(View view) {
+        switch(view.getId()) {
+            case R.id.buttonStart:
+                // TODO
+                break;
+            case R.id.buttonStop:
+                Intent iSave = new Intent(this, SaveRouteActivity.class);
+                startActivity(iSave);
+                break;
+        }
     }
 
 
