@@ -1,47 +1,25 @@
 package com.example.tyson.trackatrail;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 
-public class MainMenuActivity extends Activity {
-    User user;
-    DBAdapter db;
+public class ProfileMenuActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
-        db = new DBAdapter(this);
-
-        db.open();
-        String inUsername = getIntent().getExtras().getString("username");
-
-        Cursor c = db.getAllUsers();
-        if (c.moveToFirst()) {
-            do {
-                User dbUser = db.RetrieveUser(c);
-
-                if (dbUser.username.equals(inUsername)) {
-                    user = dbUser;
-                    break;
-                }
-            } while(c.moveToNext());
-        }
-
-        db.close();
-        Toast.makeText(this, "Welcome " + user.username, Toast.LENGTH_SHORT).show();
+        setContentView(R.layout.activity_profile_menu);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.profile_menu, menu);
         return true;
     }
 
@@ -57,5 +35,7 @@ public class MainMenuActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void onButtonClick(View view) {
+        // to be done - becky
+    }
 }

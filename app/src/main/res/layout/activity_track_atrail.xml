@@ -50,7 +50,8 @@
         android:layout_alignRight="@+id/passwordInput"
         android:layout_alignEnd="@+id/passwordInput"
         android:layout_alignLeft="@+id/passwordInput"
-        android:layout_alignStart="@+id/passwordInput" />
+        android:layout_alignStart="@+id/passwordInput"
+        android:onClick="onButtonClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

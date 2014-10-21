@@ -33,10 +33,6 @@
             android:label="@string/title_activity_save_route" >
         </activity>
         <activity
-            android:name=".SavedRouteActivity"
-            android:label="@string/title_activity_saved_route" >
-        </activity>
-        <activity
             android:name=".RouteManagerActivity"
             android:label="@string/route_manager"
             android:parentActivityName=".TrackATrail" >
@@ -51,6 +47,14 @@
         <activity
             android:name=".StartRouteActivity"
             android:label="@string/title_activity_start_route" >
+        </activity>
+        <activity
+            android:name=".SavedRouteActivity"
+            android:label="@string/title_activity_saved_route" >
+        </activity>
+        <activity
+            android:name=".ProfileMenuActivity"
+            android:label="@string/title_activity_profile_menu" >
         </activity>
     </application>
 

@@ -22,7 +22,7 @@
     <string name="password">Password</string>
     <string name="confirmpassword">Confirm Password</string>
     <string name="email">Email</string>
-    <string name="signup">Sign Up</string>
+    <string name="signup">Register</string>
     <string name="title_activity_save_route">Save Route</string>
     <string name="routemgr_startnewroute">Start New Route</string>
 
@@ -38,7 +38,6 @@
     <string name="routetime">Route Time:</string>
     <string name="routeSave">Save Route</string>
 
-
     <!-- Main Menu strings -->
     <string name="title_activity_main_menu">Main Menu</string>
     <string name="mainmenu">TrackATrail Main Menu</string>
@@ -46,5 +45,12 @@
     <string name="myroutes">My Routes</string>
     <string name="findroutes">Find Routes</string>
     <string name="mysettings">Settings</string>
+    <string name="title_activity_profile_menu">ProfileMenuActivity</string>
+
+    <!-- Password Popup strings -->
+    <string name="passpopuppassword">Enter Password:</string>
+    <string name="passpopupconfirm">Re-enter Password:</string>
+    <string name="passpopupsubmit">Submit</string>
+    <string name="passpopupcancel">Cancel</string>
 
 </resources>
