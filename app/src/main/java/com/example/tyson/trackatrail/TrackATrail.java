@@ -10,15 +10,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class TrackATrail extends Activity {
     DBAdapter db;
+    EditText etUsername, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_atrail);
         db = new DBAdapter(this);
+
+        // Set the username and password controls
+        etUsername = (EditText)findViewById(R.id.usernameInput);
+        etPassword = (EditText)findViewById(R.id.passwordInput);
     }
 
 
@@ -39,24 +43,16 @@ public class TrackATrail extends Activity {
             openMenu("about");
             return true;
         }
-//        else if (id == R.id.action_route_manager) {
-//            openMenu("routemanager");
-//            return true;
-//        }
         return super.onOptionsItemSelected(item);
     }
 
+    // Open the selected menu item
     public void openMenu(String menuItem) {
         if(menuItem.equals("about")) {
             Intent about = new Intent(this, About.class);
             startActivity(about);
         }
-        else if(menuItem.equals("routemanager")) {
-            Intent routemanager = new Intent(this, RouteManagerActivity.class);
-            startActivity(routemanager);
-        }
     }
-
 
     public void onButtonClick(View view) {
         switch(view.getId()) {
@@ -65,8 +61,6 @@ public class TrackATrail extends Activity {
                 startActivity(iReg);
                 break;
             case R.id.buttonSignin:
-                EditText etUsername = (EditText)findViewById(R.id.usernameInput);
-
                 if(login() == true) {
                     Intent iLogin = new Intent(this,MainMenuActivity.class);
                     String sUsername = etUsername.getText().toString();
@@ -80,9 +74,6 @@ public class TrackATrail extends Activity {
     }
 
     public boolean login() {
-        EditText etUsername = (EditText)findViewById(R.id.usernameInput);
-        EditText etPassword = (EditText)findViewById(R.id.passwordInput);
-
         db.open();
 
         Cursor c = db.getAllUsers();
@@ -93,13 +84,6 @@ public class TrackATrail extends Activity {
             if (c.moveToFirst()) {
                 do {
                     User dbUser = db.RetrieveUser(c);
-
-                    // *** DELETE WHEN DONE TESTING ***
-                    Toast.makeText(this,
-                            dbUser.user_ID + "\n" +
-                            dbUser.username + "\n" +
-                            dbUser.password
-                            ,Toast.LENGTH_SHORT).show();
                 } while (c.moveToNext());
             }
 
@@ -123,5 +107,13 @@ public class TrackATrail extends Activity {
 
         db.close();
         return false;
+    }
+
+    // Clear the username and password fields to make sure the user is not signed in by anyone else
+    @Override
+    protected void onPause() {
+        etUsername.setText("");
+        etPassword.setText("");
+        super.onPause();
     }
 }

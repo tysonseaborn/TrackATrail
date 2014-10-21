@@ -1,5 +1,6 @@
 package com.example.tyson.trackatrail;
 
+// User class
 public class User {
     public static final String KEY_ID = "id";
     public static final String KEY_firstname = "firstname";

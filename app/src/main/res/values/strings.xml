@@ -52,5 +52,11 @@
     <string name="passpopupconfirm">Re-enter Password:</string>
     <string name="passpopupsubmit">Submit</string>
     <string name="passpopupcancel">Cancel</string>
+    <string name="passmatch">Passwords match</string>
+    <string name="passnomatch">Passwords do not match</string>
+
+    <!-- Profile strings -->
+    <string name="update">Update</string>
+    <string name="submit">Submit</string>
 
 </resources>
