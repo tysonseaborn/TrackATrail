@@ -5,8 +5,8 @@
         android:title="@string/title_activity_about"
         android:orderInCategory="100"
         android:showAsAction="never" />
-    <item android:id="@+id/action_route_manager"
-        android:title="@string/route_manager"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+    <!--<item android:id="@+id/action_route_manager"-->
+        <!--android:title="@string/route_manager"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:showAsAction="never" />-->
 </menu>

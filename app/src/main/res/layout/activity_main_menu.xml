@@ -25,7 +25,8 @@
         android:id="@+id/btnProfile"
         android:layout_below="@+id/mainMenuTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp" />
+        android:layout_marginTop="102dp"
+        android:onClick="onButtonClick" />
 
     <Button
         android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
         android:text="@string/myroutes"
         android:id="@+id/btnMyRoutes"
         android:layout_below="@+id/btnProfile"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onButtonClick" />
 
     <Button
         android:layout_width="wrap_content"

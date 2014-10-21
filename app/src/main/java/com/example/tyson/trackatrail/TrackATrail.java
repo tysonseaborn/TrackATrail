@@ -39,10 +39,10 @@ public class TrackATrail extends Activity {
             openMenu("about");
             return true;
         }
-        else if (id == R.id.action_route_manager) {
-            openMenu("routemanager");
-            return true;
-        }
+//        else if (id == R.id.action_route_manager) {
+//            openMenu("routemanager");
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -67,7 +67,7 @@ public class TrackATrail extends Activity {
             case R.id.buttonSignin:
                 EditText etUsername = (EditText)findViewById(R.id.usernameInput);
 
-                if(login()) {
+                if(login() == true) {
                     Intent iLogin = new Intent(this,MainMenuActivity.class);
                     String sUsername = etUsername.getText().toString();
                     iLogin.putExtra("username",sUsername);
