@@ -1,17 +1,34 @@
 package com.example.tyson.trackatrail;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class StartRouteActivity extends TrackATrail {
+
+    //String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_route);
+    }
+
+    public void onButtonClick(View view) {
+        switch(view.getId()) {
+            case R.id.buttonStart:
+                // TODO
+                break;
+            case R.id.buttonSaveRoute:
+                Intent iSave = new Intent(this, SaveRouteActivity.class);
+                //iSave.putExtra("user_ID", userID);
+                startActivity(iSave);
+                break;
+        }
     }
 
 

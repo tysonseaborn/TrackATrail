@@ -19,7 +19,7 @@
             android:inputType="textPersonName"
             android:hint="@string/routename"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/editTextRouteName" />
 
         <Space
             android:layout_width="20dp"
@@ -31,7 +31,7 @@
             android:inputType="textPersonName"
             android:hint="@string/routedescription"
             android:ems="10"
-            android:id="@+id/editText3" />
+            android:id="@+id/editTextRouteDescription" />
 
         <Space
             android:layout_width="20dp"
@@ -40,7 +40,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner" />
+            android:id="@+id/spinnerRouteType" />
 
         <Space
             android:layout_width="25dp"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="343km"
-                android:id="@+id/textView2" />
+                android:id="@+id/textViewRouteDistance" />
 
         </LinearLayout>
 
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="00:34:23"
-                android:id="@+id/textView4" />
+                android:id="@+id/textViewRouteTime" />
 
         </LinearLayout>
 
@@ -108,7 +108,8 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="@string/routeSave"
-            android:id="@+id/button" />
+            android:id="@+id/button"
+            android:onClick="onButtonClick" />
 
     </LinearLayout>
 

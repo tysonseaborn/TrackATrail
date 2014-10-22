@@ -34,18 +34,20 @@
                 android:id="@+id/buttonStart"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:onClick="onButtonClick" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/start_route_save_button"
-                android:id="@+id/buttonStop"
+                android:id="@+id/buttonSaveRoute"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:onClick="onButtonClick" />
         </LinearLayout>
     </LinearLayout>
 
