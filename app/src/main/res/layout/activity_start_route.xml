@@ -13,14 +13,13 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/googleMapStart"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/pic2"
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            class="com.google.android.gms.maps.SupportMapFragment" />
 
         <LinearLayout
             android:orientation="horizontal"
