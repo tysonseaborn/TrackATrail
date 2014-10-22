@@ -1,6 +1,7 @@
 package com.example.tyson.trackatrail;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,8 @@ public class SaveRouteActivity extends TrackATrail {
     EditText etName, etDescription;
     TextView tvDistance, tvTime;
     Spinner sItems;
+    User user;
+    String id;
     DBAdapter db;
 
     @Override
@@ -33,6 +36,22 @@ public class SaveRouteActivity extends TrackATrail {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_route);
         db = new DBAdapter(this);
+
+        db.open();
+        //id = getIntent().getExtras().getString("user_ID");
+
+//        Cursor c = db.getAllUsers();
+//        if (c.moveToFirst()) {
+//            do {
+//                User dbUser = db.RetrieveUser(c);
+//
+//                if (dbUser.user_ID.equals(id)) {
+//                    user = dbUser;
+//                    break;
+//                }
+//            } while(c.moveToNext());
+//        }
+
 
         // you need to have a list of data that you want the spinner to display
         List<String> spinnerArray =  new ArrayList<String>();
@@ -61,7 +80,7 @@ public class SaveRouteActivity extends TrackATrail {
 
                 db.open();
                 Route route = new Route();
-                //User user = dbUser;
+                route.user_ID = "1";
                 route.name = etName.getText().toString();
                 route.description = etDescription.getText().toString();
                 route.type = sItems.getSelectedItem().toString();

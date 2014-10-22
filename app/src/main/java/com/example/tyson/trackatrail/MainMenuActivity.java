@@ -73,7 +73,7 @@ public class MainMenuActivity extends Activity {
             case R.id.btnProfile:
                 // Pass in the user's username to the profile activity
                 Intent iProfile = new Intent(this,ProfileMenuActivity.class);
-                iProfile.putExtra("username",inUsername);
+                iProfile.putExtra("username", inUsername);
 
                 startActivity(iProfile);
                 break;

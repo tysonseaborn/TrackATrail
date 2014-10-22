@@ -10,6 +10,8 @@ import android.view.View;
 
 public class StartRouteActivity extends TrackATrail {
 
+    //String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +23,9 @@ public class StartRouteActivity extends TrackATrail {
             case R.id.buttonStart:
                 // TODO
                 break;
-            case R.id.buttonStop:
+            case R.id.buttonSaveRoute:
                 Intent iSave = new Intent(this, SaveRouteActivity.class);
+                //iSave.putExtra("user_ID", userID);
                 startActivity(iSave);
                 break;
         }

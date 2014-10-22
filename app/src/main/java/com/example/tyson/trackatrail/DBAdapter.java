@@ -21,7 +21,7 @@ public class DBAdapter {
                     + "firstname text not null, lastname text not null, username text not null unique,"
                     + "password text not null, email text not null);";
     static final String DATABASE_CREATE_ROUTES =
-            "create table routes (id integer primary key autoincrement, "
+            "create table routes (id integer primary key autoincrement, user_id integer not null, "
                     + "name text not null, description text not null, type text not null,"
                     + "distance text not null, time text not null, FOREIGN KEY(user_id) REFERENCES users(id));";
 
@@ -70,6 +70,7 @@ public class DBAdapter {
     public DBAdapter open() throws SQLException
     {
         db = DBHelper.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys=ON;");
         return this;
     }
 
@@ -131,7 +132,7 @@ public class DBAdapter {
     public int insertRoute (Route route) {
         //SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //values.put(Route.KEY_USER_ID, user.user_ID);
+        values.put(Route.KEY_USER_ID, route.user_ID);
         values.put(Route.KEY_name, route.name);
         values.put(Route.KEY_description, route.description);
         values.put(Route.KEY_type, route.type);

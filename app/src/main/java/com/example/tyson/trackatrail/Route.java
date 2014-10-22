@@ -4,7 +4,7 @@ import java.sql.Time;
 
 public class Route {
     public static final String KEY_ID = "id";
-    public static final String KEY_USER_ID = "id";
+    public static final String KEY_USER_ID = "user_id";
     public static final String KEY_name = "name";
     public static final String KEY_description = "description";
     public static final String KEY_type = "type";
