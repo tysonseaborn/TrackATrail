@@ -1,5 +1,27 @@
 package com.example.tyson.trackatrail;
 
+import android.graphics.Color;
+import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,28 +32,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.json.JSONObject;
 
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.Menu;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
-
-
-public class About extends FragmentActivity {
+public class About extends FragmentActivity implements
+        GooglePlayServicesClient.ConnectionCallbacks,
+        GooglePlayServicesClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     GoogleMap map;
     ArrayList<LatLng> markerPoints;
+
+    private static final int MILLISECONDS_PER_SECOND = 1000;
+    public static final int UPDATE_INTERVAL_IN_SECONDS = 5;
+    private static final long UPDATE_INTERVAL =
+            MILLISECONDS_PER_SECOND * UPDATE_INTERVAL_IN_SECONDS;
+    private static final int FASTEST_INTERVAL_IN_SECONDS = 1;
+    private static final long FASTEST_INTERVAL =
+            MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
+    private static final float DISPLACEMENT_DISTANCE =
+            5.0f;
+
+    LocationRequest mLocationRequest;
+    LocationClient mLocationClient;
+    Location mCurrentLocation;
+    ArrayList<Location> locationArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,101 +64,78 @@ public class About extends FragmentActivity {
         markerPoints = new ArrayList<LatLng>();
 
         // Getting reference to SupportMapFragment of the activity_main
-        SupportMapFragment fm = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         // Getting Map for the SupportMapFragment
         map = fm.getMap();
 
-        if(map!=null){
+        if (map != null) {
 
             // Enable MyLocation Button in the Map
             map.setMyLocationEnabled(true);
+            locationArray = new ArrayList<Location>();
+            // Create the LocationRequest object
+            mLocationRequest = LocationRequest.create();
+            // Use high accuracy
+            mLocationRequest.setPriority(
+                    LocationRequest.PRIORITY_HIGH_ACCURACY);
+            // Set the update interval to 5 seconds
+            mLocationRequest.setInterval(UPDATE_INTERVAL);
+            // Set the fastest update interval to 1 second
+            mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+            mLocationRequest.setSmallestDisplacement(DISPLACEMENT_DISTANCE);
 
-            // Setting onclick event listener for the map
-            map.setOnMapClickListener(new OnMapClickListener() {
-
-                @Override
-                public void onMapClick(LatLng point) {
-
-                    // Already two locations
-                    if(markerPoints.size()>1){
-                        markerPoints.clear();
-                        map.clear();
-                    }
-
-                    // Adding new item to the ArrayList
-                    markerPoints.add(point);
-
-                    // Creating MarkerOptions
-                    MarkerOptions options = new MarkerOptions();
-
-                    // Setting the position of the marker
-                    options.position(point);
-
-                    /**
-                     * For the start location, the color of marker is GREEN and
-                     * for the end location, the color of marker is RED.
-                     */
-                    if(markerPoints.size()==1){
-                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    }else if(markerPoints.size()==2){
-                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    }
-
-
-                    // Add new marker to the Google Map Android API V2
-                    map.addMarker(options);
-
-                    // Checks, whether start and end locations are captured
-                    if(markerPoints.size() >= 2){
-                        LatLng origin = markerPoints.get(0);
-                        LatLng dest = markerPoints.get(1);
-
-                        // Getting URL to the Google Directions API
-                        String url = getDirectionsUrl(origin, dest);
-
-                        DownloadTask downloadTask = new DownloadTask();
-
-                        // Start downloading json data from Google Directions API
-                        downloadTask.execute(url);
-                    }
-
-                }
-            });
+            mLocationClient = new LocationClient(this, this, this);
         }
     }
 
-    private String getDirectionsUrl(LatLng origin,LatLng dest){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 1. connect the client.
+        mLocationClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 1. disconnecting the client invalidates it.
+        mLocationClient.disconnect();
+    }
+
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
         // Origin of route
-        String str_origin = "origin="+origin.latitude+","+origin.longitude;
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
         // Destination of route
-        String str_dest = "destination="+dest.latitude+","+dest.longitude;
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
 
 
         // Sensor enabled
         String sensor = "sensor=false";
 
         // Building the parameters to the web service
-        String parameters = str_origin+"&"+str_dest+"&"+sensor;
+        String parameters = str_origin + "&" + str_dest + "&" + sensor;
 
         // Output format
         String output = "json";
 
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
 
         return url;
     }
 
-    /** A method to download json data from url */
-    private String downloadUrl(String strUrl) throws IOException{
+    /**
+     * A method to download json data from url
+     */
+    private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try{
+        try {
             URL url = new URL(strUrl);
 
             // Creating an http connection to communicate with url
@@ -150,10 +149,10 @@ public class About extends FragmentActivity {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
 
-            StringBuffer sb  = new StringBuffer();
+            StringBuffer sb = new StringBuffer();
 
             String line = "";
-            while( ( line = br.readLine())  != null){
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
 
@@ -161,15 +160,55 @@ public class About extends FragmentActivity {
 
             br.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.d("Exception while downloading url", e.toString());
-        }finally{
+        } finally {
             iStream.close();
             urlConnection.disconnect();
         }
         return data;
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+        if (mLocationClient != null) {
+            mLocationClient.requestLocationUpdates(mLocationRequest, this);
+            Toast.makeText(this, "SWAG",Toast.LENGTH_LONG).show();
+        }
+
+        if (mLocationClient != null) {
+            mCurrentLocation = mLocationClient.getLastLocation();
+            locationArray.add(mCurrentLocation);
+            Toast.makeText(this, "SWAG2",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    @Override
+    public void onDisconnected() {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mCurrentLocation = mLocationClient.getLastLocation();
+        locationArray.add(mCurrentLocation);
+        Toast.makeText(this, mCurrentLocation.getLatitude() + " " + mCurrentLocation.getLongitude(),Toast.LENGTH_LONG).show();
+        if (locationArray.size() > 2) {
+            Toast.makeText(this, "SWAG3",Toast.LENGTH_LONG).show();
+            map.addPolyline(new PolylineOptions()
+                    .add(new LatLng(locationArray.get(locationArray.size()-2).getLatitude(), locationArray.get(locationArray.size()-2).getLongitude() ),
+                            new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()))
+                    .width(2)
+                    .color(Color.MAGENTA).geodesic(true));
+        }
+
+    }
 
 
     // Fetches data from url passed
@@ -257,7 +296,6 @@ public class About extends FragmentActivity {
                 lineOptions.addAll(points);
                 lineOptions.width(2);
                 lineOptions.color(Color.RED);
-
             }
 
             // Drawing polyline in the Google Map for the i-th route
