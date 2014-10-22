@@ -38,7 +38,6 @@ public class StartRouteActivity  extends TrackATrail implements
 
     //Map Properties
     GoogleMap map;
-    ArrayList<LatLng> markerPoints;
 
     private static final int MILLISECONDS_PER_SECOND = 1000;
     public static final int UPDATE_INTERVAL_IN_SECONDS = 5;
@@ -54,6 +53,7 @@ public class StartRouteActivity  extends TrackATrail implements
     LocationClient mLocationClient;
     Location mCurrentLocation;
     ArrayList<Location> locationArray;
+    ArrayList<Location> completedRouteArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +85,6 @@ public class StartRouteActivity  extends TrackATrail implements
 
     private void initMap() {
         // Initializing
-        markerPoints = new ArrayList<LatLng>();
-
         // Getting reference to SupportMapFragment of the activity_main
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -198,7 +196,7 @@ public class StartRouteActivity  extends TrackATrail implements
                 map.addPolyline(new PolylineOptions()
                         .add(new LatLng(locationArray.get(locationArray.size()-2).getLatitude(), locationArray.get(locationArray.size()-2).getLongitude() ),
                                 new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()))
-                        .width(2)
+                        .width(5)
                         .color(Color.MAGENTA).geodesic(true));
             }
         }
@@ -207,7 +205,7 @@ public class StartRouteActivity  extends TrackATrail implements
     public void onButtonClick(View view) {
         switch(view.getId()) {
             case R.id.buttonStart:
-                startTracking();
+                manageTracking();
                 break;
             case R.id.buttonSaveRoute:
                 Intent iSave = new Intent(this, SaveRouteActivity.class);
@@ -217,7 +215,7 @@ public class StartRouteActivity  extends TrackATrail implements
         }
     }
 
-    public void startTracking() {
+    public void manageTracking() {
         startedTracking = true;
 
         if(btnStart.getText().equals("Start Tracking")) {
@@ -229,6 +227,7 @@ public class StartRouteActivity  extends TrackATrail implements
             btnStart.setText("Start Tracking");
             btnSave.setEnabled(true);
             currentlyTracking = false;
+            completedRouteArray = locationArray;
         }
     }
 }
