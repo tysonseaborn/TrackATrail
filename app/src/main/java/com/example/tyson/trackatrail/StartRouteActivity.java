@@ -3,6 +3,7 @@ package com.example.tyson.trackatrail;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,10 +14,33 @@ public class StartRouteActivity extends TrackATrail {
 
     boolean startedTracking, currentlyTracking = false;
     Button btnStart, btnSave;
+    //String username;
+    User user;
+    String inUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+        db.open();
+        inUsername = getIntent().getExtras().getString("username");
+
+        Cursor c = db.getAllUsers();
+        if (c.moveToFirst()) {
+            do {
+                User dbUser = db.RetrieveUser(c);
+
+                if (dbUser.username.equals(inUsername)) {
+                    user = dbUser;
+                    break;
+                }
+            } while(c.moveToNext());
+        }
+
+        db.close();
+
         setContentView(R.layout.activity_start_route);
         btnStart = (Button)findViewById(R.id.buttonStart);
         btnSave = (Button)findViewById(R.id.buttonSaveRoute);
@@ -53,10 +77,11 @@ public class StartRouteActivity extends TrackATrail {
     public void onButtonClick(View view) {
         switch(view.getId()) {
             case R.id.buttonStart:
-                startTracking();
+                // TODO
                 break;
             case R.id.buttonSaveRoute:
                 Intent iSave = new Intent(this, SaveRouteActivity.class);
+                iSave.putExtra("username", inUsername);
                 startActivity(iSave);
                 break;
         }

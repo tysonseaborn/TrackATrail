@@ -29,7 +29,6 @@ public class SaveRouteActivity extends TrackATrail {
     TextView tvDistance, tvTime;
     Spinner sItems;
     User user;
-    String id;
     DBAdapter db;
 
     @Override
@@ -39,19 +38,19 @@ public class SaveRouteActivity extends TrackATrail {
         db = new DBAdapter(this);
 
         db.open();
-        //id = getIntent().getExtras().getString("user_ID");
+        String inUsername = getIntent().getExtras().getString("username");
 
-//        Cursor c = db.getAllUsers();
-//        if (c.moveToFirst()) {
-//            do {
-//                User dbUser = db.RetrieveUser(c);
-//
-//                if (dbUser.user_ID.equals(id)) {
-//                    user = dbUser;
-//                    break;
-//                }
-//            } while(c.moveToNext());
-//        }
+        Cursor c = db.getAllUsers();
+        if (c.moveToFirst()) {
+            do {
+                User dbUser = db.RetrieveUser(c);
+
+                if (dbUser.username.equals(inUsername)) {
+                    user = dbUser;
+                    break;
+                }
+            } while(c.moveToNext());
+        }
 
 
         // you need to have a list of data that you want the spinner to display
@@ -81,7 +80,8 @@ public class SaveRouteActivity extends TrackATrail {
 
                 db.open();
                 Route route = new Route();
-                route.user_ID = "1";
+                //route.user_ID = "1";
+                route.user_ID = user.user_ID;
                 route.name = etName.getText().toString();
                 route.description = etDescription.getText().toString();
                 route.type = sItems.getSelectedItem().toString();
