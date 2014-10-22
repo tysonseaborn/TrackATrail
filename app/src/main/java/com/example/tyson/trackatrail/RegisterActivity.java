@@ -123,6 +123,7 @@ public class RegisterActivity extends Activity {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            finish();
                         }
                     } else {
                         // Email is in an invalid format

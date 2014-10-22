@@ -78,15 +78,9 @@ public class TrackATrail extends Activity {
 
         Cursor c = db.getAllUsers();
 
+
         if(etUsername.getText().toString().equals("") ||
                 etPassword.getText().toString().equals("")) {
-
-            if (c.moveToFirst()) {
-                do {
-                    User dbUser = db.RetrieveUser(c);
-                } while (c.moveToNext());
-            }
-
             Toast.makeText(this, "Please enter data in all fields", Toast.LENGTH_LONG).show();
         }
         else {
@@ -101,6 +95,9 @@ public class TrackATrail extends Activity {
                     }
                 } while (c.moveToNext());
 
+                Toast.makeText(this, "No user found", Toast.LENGTH_LONG).show();
+            }
+            else {
                 Toast.makeText(this, "No user found", Toast.LENGTH_LONG).show();
             }
         }

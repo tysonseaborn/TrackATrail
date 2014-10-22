@@ -47,7 +47,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.5"
-                android:onClick="onButtonClick" />
+                android:onClick="onButtonClick"
+                android:enabled="false" />
         </LinearLayout>
     </LinearLayout>
 

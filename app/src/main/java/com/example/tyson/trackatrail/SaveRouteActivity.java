@@ -1,6 +1,7 @@
 package com.example.tyson.trackatrail;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -114,6 +115,12 @@ public class SaveRouteActivity extends TrackATrail {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    // Return to route manager
+                    Intent i = new Intent(this, RouteManagerActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    finish();
                 }
         }
         else {
