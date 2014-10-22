@@ -75,7 +75,6 @@ public class StartRouteActivity  extends TrackATrail implements
 
         db.close();
 
-        setContentView(R.layout.activity_start_route);
 
         initMap();
 
@@ -222,14 +221,13 @@ public class StartRouteActivity  extends TrackATrail implements
 
         if(btnStart.getText().equals("Start Tracking")) {
             btnStart.setText("Stop Tracking");
-            btnSave.setEnabled(true);
+            btnSave.setEnabled(false);
             currentlyTracking = true;
         }
         else {
             btnStart.setText("Start Tracking");
-            btnSave.setEnabled(false);
+            btnSave.setEnabled(true);
             currentlyTracking = false;
         }
-
     }
 }
