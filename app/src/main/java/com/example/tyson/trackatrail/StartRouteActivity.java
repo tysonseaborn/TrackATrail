@@ -21,8 +21,7 @@ public class StartRouteActivity extends TrackATrail {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        setContentView(R.layout.activity_start_route);
 
         db.open();
         inUsername = getIntent().getExtras().getString("username");
@@ -41,7 +40,6 @@ public class StartRouteActivity extends TrackATrail {
 
         db.close();
 
-        setContentView(R.layout.activity_start_route);
         btnStart = (Button)findViewById(R.id.buttonStart);
         btnSave = (Button)findViewById(R.id.buttonSaveRoute);
     }
@@ -77,7 +75,7 @@ public class StartRouteActivity extends TrackATrail {
     public void onButtonClick(View view) {
         switch(view.getId()) {
             case R.id.buttonStart:
-                // TODO
+                startTracking();
                 break;
             case R.id.buttonSaveRoute:
                 Intent iSave = new Intent(this, SaveRouteActivity.class);
@@ -90,15 +88,15 @@ public class StartRouteActivity extends TrackATrail {
     public void startTracking() {
         startedTracking = true;
 
-        if(btnStart.getText() == "Start Tracking") {
+        if(btnStart.getText().equals("Start Tracking")) {
             btnStart.setText("Stop Tracking");
-            btnSave.setEnabled(true);
+            btnSave.setEnabled(false);
             currentlyTracking = true;
         }
         else {
             btnStart.setText("Start Tracking");
-            btnSave.setEnabled(false);
             currentlyTracking = false;
+            btnSave.setEnabled(true);
         }
 
     }
