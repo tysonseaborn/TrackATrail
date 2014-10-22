@@ -64,7 +64,7 @@ public class TrackATrail extends Activity {
                 if(login() == true) {
                     Intent iLogin = new Intent(this,MainMenuActivity.class);
                     String sUsername = etUsername.getText().toString();
-                    iLogin.putExtra("username",sUsername);
+                    iLogin.putExtra("username", sUsername);
 
                     startActivity(iLogin);
                 }

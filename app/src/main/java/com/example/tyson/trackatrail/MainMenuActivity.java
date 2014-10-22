@@ -79,6 +79,7 @@ public class MainMenuActivity extends Activity {
                 break;
             case R.id.btnMyRoutes:
                 Intent iRoutes = new Intent(this, RouteManagerActivity.class);
+                iRoutes.putExtra("username", inUsername);
                 startActivity(iRoutes);
                 break;
         }
