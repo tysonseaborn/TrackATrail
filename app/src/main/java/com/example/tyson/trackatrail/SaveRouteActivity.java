@@ -44,7 +44,7 @@ public class SaveRouteActivity extends TrackATrail {
         db.open();
         inUsername = getIntent().getExtras().getString("username");
         latitudes = getIntent().getExtras().getDoubleArray("latitudes");
-        longitudes = getIntent().getExtras().getDoubleArray("longitutudes");
+        longitudes = getIntent().getExtras().getDoubleArray("longitudes");
 
         Cursor c = db.getAllUsers();
         if (c.moveToFirst()) {
@@ -94,7 +94,21 @@ public class SaveRouteActivity extends TrackATrail {
                 int id = db.insertRoute(route);
                 route.route_ID = String.valueOf(id);
                 db.close();
+                Toast.makeText(this, "Before locations", Toast.LENGTH_LONG);
+                if (id > 0) {
+                    for (int i = 0; i < latitudes.length; i++) {
+                        db.open();
+                        RouteLocation loc = new RouteLocation();
+                        loc.route_ID = route.route_ID;
+                        loc.latitude = (float) latitudes[i];
+                        loc.longitude = (float) longitudes[i];
 
+                        int lid = db.insertLocation(loc);
+                        loc.location_ID = String.valueOf(lid);
+                        db.close();
+                    }
+                }
+                Toast.makeText(this, "After locations", Toast.LENGTH_LONG);
                 if (id < 0 ) {
                     Toast.makeText(this, "Route not added", Toast.LENGTH_SHORT).show();
                 }
@@ -145,4 +159,24 @@ public class SaveRouteActivity extends TrackATrail {
         inputStream.close();
         outputStream.close();
     }
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.save_route, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

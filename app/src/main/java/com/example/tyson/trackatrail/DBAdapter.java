@@ -12,6 +12,7 @@ public class DBAdapter {
     static final String DATABASE_NAME = "TrackATrailData";
     static final String DATABASE_TABLE = "users";
     static final String DATABASE_TABLE_ROUTES = "routes";
+    static final String DATABASE_TABLE_ROUTE_LOCATIONS = "routelocations";
     static final int DATABASE_VERSION = 1;
     static final String TAG = "DBAdapter";
 
@@ -24,6 +25,9 @@ public class DBAdapter {
             "create table routes (id integer primary key autoincrement, user_id integer not null, "
                     + "name text not null, description text not null, type text not null,"
                     + "distance text not null, FOREIGN KEY(user_id) REFERENCES users(id));";
+    static final String DATABASE_CREATE_ROUTE_LOCATIONS =
+            "create table routelocations (id integer primary key autoincrement," +
+                    "route_id integer not null, lat float not null, long float not null);";
 
     final Context context;
     DatabaseHelper DBHelper;
@@ -49,6 +53,7 @@ public class DBAdapter {
             try {
                 db.execSQL(DATABASE_CREATE);
                 db.execSQL(DATABASE_CREATE_ROUTES);
+                db.execSQL(DATABASE_CREATE_ROUTE_LOCATIONS);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -155,6 +160,17 @@ public class DBAdapter {
                 Route.KEY_type, Route.KEY_distance}, null, null, null, null, null);
     }
 
+    // ------------------------------------------------------------------------
+    //Location Database Methods
+    public int insertLocation(RouteLocation loc) {
+        ContentValues values = new ContentValues();
+        values.put(RouteLocation.KEY_ROUTE_ID, loc.route_ID);
+        values.put(RouteLocation.KEY_lat, loc.latitude);
+        values.put(RouteLocation.KEY_long, loc.longitude);
+
+        long route_id = db.insert(DATABASE_TABLE_ROUTE_LOCATIONS, null, values);
+        return (int) route_id;
+    }
     /*** DOES NOT WORK CURRENTLY ***
      //---retrieves a particular contact---
      public Cursor getUser(String username) throws SQLException

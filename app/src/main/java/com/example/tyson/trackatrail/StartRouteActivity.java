@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -205,21 +206,35 @@ public class StartRouteActivity  extends TrackATrail implements
                 manageTracking();
                 break;
             case R.id.buttonSaveRoute:
-                if (completedRouteArray.size() > 2) {
+                if (completedRouteArray.size() > -1) {
 
                     Intent iSave = new Intent(this, SaveRouteActivity.class);
                     iSave.putExtra("username", inUsername);
-                    ArrayList<Double> latitudes = new ArrayList<Double>();
-                    ArrayList<Double> longitudes = new ArrayList<Double>();
+                    double[] latitudes = new double[5];
+                    double[] longitudes = new double[5];
 
-                    for (int i = 0; i < completedRouteArray.size(); i++) {
+                   /*( for (int i = 0; i < completedRouteArray.size(); i++) {
                         latitudes.add(completedRouteArray.get(i).getLatitude());
                         longitudes.add(completedRouteArray.get(i).getLongitude());
-                    }
+                    }*/
+                    latitudes[0] = 43.01186;
+                    latitudes[1] = 43.01192;
+                    latitudes[2] = 43.01223;
+                    latitudes[3] = 43.01255;
+                    latitudes[4] = 43.01267;
+
+                    longitudes[0] = -81.21094;
+                    longitudes[1] =-81.21042;
+                    longitudes[2] = -81.20948;
+                    longitudes[3] = -81.20776;
+                    longitudes[4] = -81.20682;
 
                     iSave.putExtra("latitudes", latitudes);
                     iSave.putExtra("longitudes", longitudes);
                     startActivity(iSave);
+                }
+                else {
+                    Toast.makeText(this, "You need to travel further peasant!", Toast.LENGTH_LONG).show();
                 }
 
                 break;

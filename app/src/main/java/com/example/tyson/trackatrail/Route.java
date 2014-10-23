@@ -1,7 +1,5 @@
 package com.example.tyson.trackatrail;
 
-import java.sql.Time;
-
 public class Route {
     public static final String KEY_ID = "id";
     public static final String KEY_USER_ID = "user_id";
