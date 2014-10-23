@@ -20,6 +20,7 @@
             android:id="@+id/etRouteTitle"
             android:hint="Saved Route Title"
             android:maxLength="50"
+            android:textColor="#ff000000"
             android:textSize="25dp"/>
 
         <ScrollView
@@ -54,6 +55,7 @@
                     android:inputType="textCapSentences"
                     android:maxLength="250"
                     android:textSize="25dp"
+                    android:textColor="#ff000000"
                     android:hint="Description of saved route."/>
 
             </LinearLayout>
