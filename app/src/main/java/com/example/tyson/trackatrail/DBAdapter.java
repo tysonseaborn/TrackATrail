@@ -23,7 +23,7 @@ public class DBAdapter {
                     + "password text not null, email text not null);";
     static final String DATABASE_CREATE_ROUTES =
             "create table routes (id integer primary key autoincrement, user_id integer not null, "
-                    + "name text not null, description text not null, type text not null,"
+                    + "name text not null unique, description text not null, type text not null,"
                     + "distance text not null, FOREIGN KEY(user_id) REFERENCES users(id));";
     static final String DATABASE_CREATE_ROUTE_LOCATIONS =
             "create table routelocations (id integer primary key autoincrement," +
@@ -171,20 +171,6 @@ public class DBAdapter {
         long route_id = db.insert(DATABASE_TABLE_ROUTE_LOCATIONS, null, values);
         return (int) route_id;
     }
-    /*** DOES NOT WORK CURRENTLY ***
-     //---retrieves a particular contact---
-     public Cursor getUser(String username) throws SQLException
-     {
-     Cursor mCursor =
-     db.query(true, DATABASE_TABLE, new String[] {User.KEY_ID, User.KEY_firstname,
-     User.KEY_lastname, User.KEY_username, User.KEY_password, User.KEY_email}, User.KEY_username + "=" + username, null,
-     null, null, null, null);
-     if (mCursor != null) {
-     mCursor.moveToFirst();
-     }
-     return mCursor;
-     }
-     */
 
     // Updates a user
     public boolean updateRoute(Route route)
@@ -196,7 +182,7 @@ public class DBAdapter {
         values.put(Route.KEY_type, route.type);
         values.put(Route.KEY_distance, route.distance);
 
-        return db.update(DATABASE_TABLE_ROUTES, values, User.KEY_ID + "=" + route.route_ID, null) > 0;
+        return db.update(DATABASE_TABLE_ROUTES, values, Route.KEY_ID + "=" + route.route_ID, null) > 0;
     }
 
     public Route RetrieveRoute(Cursor c)

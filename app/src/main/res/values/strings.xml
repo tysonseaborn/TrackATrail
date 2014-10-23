@@ -58,6 +58,6 @@
     <string name="submit">Submit</string>
 
     <!-- Saved Route strings -->
-    <string name="editroute">Edit Route</string>
+    <string name="editroute">Edit Route Info</string>
 
 </resources>

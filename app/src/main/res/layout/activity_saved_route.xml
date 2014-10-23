@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/etRouteTitle"
             android:hint="Saved Route Title"
-            android:textSize="25dp" />
+            android:maxLength="50"
+            android:textSize="25dp"/>
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -50,9 +51,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/editTextSavedRouteDesc"
+                    android:inputType="textCapSentences"
+                    android:maxLength="250"
                     android:textSize="25dp"
-                    android:hint="Description of saved route."
-                    android:singleLine="false" />
+                    android:hint="Description of saved route."/>
 
             </LinearLayout>
         </ScrollView>

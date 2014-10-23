@@ -63,7 +63,7 @@ public class TrackATrail extends  FragmentActivity {
             case R.id.buttonSignin:
                 if(login() == true) {
                     Intent iLogin = new Intent(this,MainMenuActivity.class);
-                    String sUsername = etUsername.getText().toString();
+                    String sUsername = etUsername.getText().toString().trim();
                     iLogin.putExtra("username", sUsername);
 
                     startActivity(iLogin);
@@ -88,8 +88,10 @@ public class TrackATrail extends  FragmentActivity {
                 do {
                     User dbUser = db.RetrieveUser(c);
 
-                    if (dbUser.username.equals(etUsername.getText().toString()) &&
-                            dbUser.password.equals(etPassword.getText().toString())) {
+                    String user = etUsername.getText().toString().trim();
+                    String pass = etPassword.getText().toString().trim();
+                    if (dbUser.username.equals(user) &&
+                            dbUser.password.equals(pass)) {
                         db.close();
                         return true;
                     }

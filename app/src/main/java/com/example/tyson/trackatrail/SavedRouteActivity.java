@@ -27,53 +27,28 @@ public class SavedRouteActivity extends TrackATrail {
     Button btnEdit;
     boolean updateValid;
     User user;
+    Route route;
     Spinner sItems;
+    String inUsername, inRouteName;
+    EditText etRouteName, etRouteDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        String routeName = "";
-        String routeType = "";
-        String routeDescription = "";
-
         setContentView(R.layout.activity_saved_route);
 
-        String inRouteName = getIntent().getExtras().getString("routeName");
-
-//        Cursor routeCursor = db.getAllRoutes();
-
-//        tvName = (TextView)findViewById(R.id.textViewSavedRouteName);
-//        //tvType = (TextView)findViewById(R.id.textViewSavedRouteName);
-//        tvDescription = (TextView)findViewById(R.id.editTextRouteDescription);
-
-//        if (routeCursor.moveToFirst()) {
-//            do {
-//                Route refRoute = db.RetrieveRoute(routeCursor);
-//
-//
-//                if (refRoute.route_ID.equals(inRouteID)) {
-//
-//                    routeName = refRoute.name;
-//                    //routeType = refRoute.type;
-//                    routeDescription = refRoute.description;
-//
-//                    break;
-//                }
-//
-//
-//
-//            } while(routeCursor.moveToNext());
-//        }
-
-//        tvName.setText(routeName);
-//        tvDescription.setText(routeDescription);
-
+        etRouteName = (EditText)findViewById(R.id.etRouteTitle);
+        etRouteDesc = (EditText)findViewById(R.id.editTextSavedRouteDesc);
         btnEdit = (Button)findViewById(R.id.btnEditRoute);
+        sItems = (Spinner) findViewById(R.id.spinnerEditRouteType);
 
         updateValid = false;
 
-        // you need to have a list of data that you want the spinner to display
+        // Get the username of the current logged in user and route name
+        inRouteName = getIntent().getExtras().getString("routeName");
+        inUsername = getIntent().getExtras().getString("username");
+
+        // spinner data
         List<String> spinnerArray =  new ArrayList<String>();
         spinnerArray.add("Walking");
         spinnerArray.add("Jogging");
@@ -81,14 +56,10 @@ public class SavedRouteActivity extends TrackATrail {
         spinnerArray.add("Roller Blading");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sItems = (Spinner) findViewById(R.id.spinnerEditRouteType);
         sItems.setAdapter(adapter);
 
         db = new DBAdapter(this);
         db.open();
-
-        // Get the username of the current logged in user
-        String inUsername = getIntent().getExtras().getString("username");
 
         // Find the user in the database
         Cursor c = db.getAllUsers();
@@ -103,14 +74,38 @@ public class SavedRouteActivity extends TrackATrail {
             } while(c.moveToNext());
         }
 
+        Cursor routeCursor = db.getAllRoutes();
+        if (routeCursor.moveToFirst()) {
+            do {
+                Route refRoute = db.RetrieveRoute(routeCursor);
+
+                if (refRoute.name.equals(inRouteName)) {
+                    route = refRoute;
+                    break;
+                }
+            } while(routeCursor.moveToNext());
+        }
+
+        // Set all the edit text fields to be the route's information
+        // Disable on start so user cannot edit unless they choose to
+        etRouteName.setText(route.name);
+        etRouteDesc.setText(route.description);
+        sItems.setSelection(adapter.getPosition(route.type));
+
+        etRouteName.setEnabled(false);
+        etRouteDesc.setEnabled(false);
+        sItems.setClickable(false);
+
         db.close();
     }
 
     public void onButtonClick(View view) {
         // User wants to edit their route information
-        if(btnEdit.getText().toString().equals("Edit Route")) {
+        if(btnEdit.getText().toString().equals("Edit Route Info")) {
             // Set the route information to be editable
-
+            etRouteName.setEnabled(true);
+            etRouteDesc.setEnabled(true);
+            sItems.setClickable(true);
 
             // Distinguishes between the action the user wants to do
             // User is in the process of editing - submit button
@@ -119,20 +114,26 @@ public class SavedRouteActivity extends TrackATrail {
         else {
             boolean routeInfoValid = true;
 
+            if(etRouteName.getText().toString().equals("") ||
+                    etRouteDesc.getText().toString().equals("")) {
+                // A field is empty
+                Toast.makeText(this,"Please enter data in all fields",Toast.LENGTH_SHORT).show();
+                routeInfoValid = false;
+            }
+
             if(routeInfoValid) {
                 popup();
             }
         }
     }
 
-    // Update the user if all checks are valid
+    // Update the route if all checks are valid
     private void updateRoute() {
         if(updateValid) { // Validated password
-            /*
-            user.username = etUsername.getText().toString();
-            user.firstname = etFirstName.getText().toString();
-            user.lastname = etLastName.getText().toString();
-            user.email = etEmail.getText().toString();
+
+            route.name = etRouteName.getText().toString();
+            route.description = etRouteDesc.getText().toString();
+            route.type = sItems.getSelectedItem().toString();
 
             // Update the user in the database
             db.open();
@@ -140,18 +141,16 @@ public class SavedRouteActivity extends TrackATrail {
             db.close();
 
             // Display message notifying user the update has completed
-            Toast.makeText(this, "User " + user.username + " updated",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Route " + route.name + " updated",Toast.LENGTH_LONG).show();
 
             // Reset fields, button, etc., to default values
-            etUsername.setEnabled(false);
-            etFirstName.setEnabled(false);
-            etLastName.setEnabled(false);
-            etEmail.setEnabled(false);
-*/
+            etRouteName.setEnabled(false);
+            etRouteDesc.setEnabled(false);
+            sItems.setClickable(false);
 
             // Distinguishes between the action the user wants to do
             // User has finished editing - update button
-            btnEdit.setText("Update");
+            btnEdit.setText("Edit Route Info");
             updateValid = false;
 
         }

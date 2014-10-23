@@ -46,10 +46,34 @@ public class RouteManagerActivity extends TrackATrail {
         setContentView(R.layout.activity_route_manager);
 
         lv = (ListView) findViewById(R.id.routeListView);
+
+        db.close();
+
+        populateList();
+
+        // List view item click
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(RouteManagerActivity.this, SavedRouteActivity.class);
+                String routeName = lv.getItemAtPosition(position).toString();
+                intent.putExtra("routeName", routeName);
+                intent.putExtra("username", inUsername);
+                startActivity(intent);
+            }
+
+        });
+
+    }
+
+    public void populateList() {
+        db.open();
+
+        lv.setAdapter(null); // clear
         List<String> routeArray = new ArrayList<String>();
 
         Cursor routeCursor = db.getAllRoutes();
-
         if (routeCursor.moveToFirst()) {
             do {
                 int routeName = routeCursor.getColumnIndex("name");
@@ -75,40 +99,13 @@ public class RouteManagerActivity extends TrackATrail {
         lv.setAdapter(arrayAdapter);
 
         db.close();
-
-        // List view item click
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Intent intent = new Intent(RouteManagerActivity.this, SavedRouteActivity.class);
-                String routeID = lv.getItemAtPosition(position).toString();
-                intent.putExtra("routeID", routeID);
-                startActivity(intent);
-            }
-
-        });
-
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.route_manager, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    protected void onResume() {
+        populateList();
+        super.onResume();
+    }
 
     public void onButtonClick(View view) {
         // go to start new route

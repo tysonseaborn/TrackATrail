@@ -85,10 +85,9 @@ public class SaveRouteActivity extends TrackATrail {
 
                 db.open();
                 Route route = new Route();
-                //route.user_ID = "1";
                 route.user_ID = user.user_ID;
-                route.name = etName.getText().toString();
-                route.description = etDescription.getText().toString();
+                route.name = etName.getText().toString().trim();
+                route.description = etDescription.getText().toString().trim();
                 route.type = sItems.getSelectedItem().toString();
                 route.distance = tvDistance.getText().toString();
                 int id = db.insertRoute(route);
