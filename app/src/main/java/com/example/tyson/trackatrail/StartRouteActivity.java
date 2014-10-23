@@ -1,6 +1,5 @@
 package com.example.tyson.trackatrail;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -9,7 +8,6 @@ import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.Button;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -112,6 +110,7 @@ public class StartRouteActivity  extends TrackATrail implements
             mLocationClient = new LocationClient(this, this, this);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -158,7 +157,6 @@ public class StartRouteActivity  extends TrackATrail implements
     public void onConnected(Bundle bundle) {
         if (mLocationClient != null) {
             mLocationClient.requestLocationUpdates(mLocationRequest, this);
-            Toast.makeText(this, "SWAG", Toast.LENGTH_LONG).show();
         }
 
         if (mLocationClient != null) {
@@ -166,7 +164,6 @@ public class StartRouteActivity  extends TrackATrail implements
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()), 18));
             locationArray.add(mCurrentLocation);
-            Toast.makeText(this, "SWAG2",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -190,11 +187,9 @@ public class StartRouteActivity  extends TrackATrail implements
 
         if (currentlyTracking = true) {
             locationArray.add(mCurrentLocation);
-            Toast.makeText(this, mCurrentLocation.getLatitude() + " " + mCurrentLocation.getLongitude(),Toast.LENGTH_LONG).show();
             if (locationArray.size() > 2) {
-                Toast.makeText(this, "SWAG3", Toast.LENGTH_LONG).show();
                 map.addPolyline(new PolylineOptions()
-                        .add(new LatLng(locationArray.get(locationArray.size()-2).getLatitude(), locationArray.get(locationArray.size()-2).getLongitude() ),
+                        .add(new LatLng(locationArray.get(locationArray.size()-2).getLatitude(), locationArray.get(locationArray.size()-2).getLongitude()),
                                 new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()))
                         .width(5)
                         .color(Color.MAGENTA).geodesic(true));
@@ -208,9 +203,23 @@ public class StartRouteActivity  extends TrackATrail implements
                 manageTracking();
                 break;
             case R.id.buttonSaveRoute:
-                Intent iSave = new Intent(this, SaveRouteActivity.class);
-                iSave.putExtra("username", inUsername);
-                startActivity(iSave);
+                if (completedRouteArray.size() > 2) {
+
+                    Intent iSave = new Intent(this, SaveRouteActivity.class);
+                    iSave.putExtra("username", inUsername);
+                    ArrayList<Double> latitudes = new ArrayList<Double>();
+                    ArrayList<Double> longitudes = new ArrayList<Double>();
+
+                    for (int i = 0; i < completedRouteArray.size(); i++) {
+                        latitudes.add(completedRouteArray.get(i).getLatitude());
+                        longitudes.add(completedRouteArray.get(i).getLongitude());
+                    }
+
+                    iSave.putExtra("latitudes", latitudes);
+                    iSave.putExtra("longitudes", longitudes);
+                    startActivity(iSave);
+                }
+
                 break;
         }
     }

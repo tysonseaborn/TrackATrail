@@ -3,6 +3,7 @@ package com.example.tyson.trackatrail;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,8 @@ public class SaveRouteActivity extends TrackATrail {
     Spinner sItems;
     User user;
     DBAdapter db;
+    double[] latitudes;
+    double[] longitudes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class SaveRouteActivity extends TrackATrail {
 
         db.open();
         String inUsername = getIntent().getExtras().getString("username");
+        latitudes = getIntent().getExtras().getDoubleArray("latitudes");
+        longitudes = getIntent().getExtras().getDoubleArray("longitutudes");
 
         Cursor c = db.getAllUsers();
         if (c.moveToFirst()) {
@@ -87,6 +92,7 @@ public class SaveRouteActivity extends TrackATrail {
                 route.type = sItems.getSelectedItem().toString();
                 route.distance = tvDistance.getText().toString();
                 route.time = tvTime.getText().toString();
+                
                 int id = db.insertRoute(route);
                 route.route_ID = String.valueOf(id);
                 db.close();
