@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends TrackATrail {
     User user;
     DBAdapter db;
     String inUsername;
@@ -74,13 +74,15 @@ public class MainMenuActivity extends Activity {
                 // Pass in the user's username to the profile activity
                 Intent iProfile = new Intent(this, ProfileMenuActivity.class);
                 iProfile.putExtra("username", inUsername);
-
                 startActivity(iProfile);
                 break;
             case R.id.btnMyRoutes:
                 Intent iRoutes = new Intent(this, RouteManagerActivity.class);
                 iRoutes.putExtra("username", inUsername);
                 startActivity(iRoutes);
+                break;
+            case R.id.btnSettings:
+                Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

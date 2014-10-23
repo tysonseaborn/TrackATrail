@@ -39,7 +39,7 @@ public class SavedRouteActivity extends TrackATrail {
 
         setContentView(R.layout.activity_saved_route);
 
-        String inRouteID = getIntent().getExtras().getString("routeID");
+        String inRouteName = getIntent().getExtras().getString("routeName");
 
 //        Cursor routeCursor = db.getAllRoutes();
 

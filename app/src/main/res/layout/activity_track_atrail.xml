@@ -14,11 +14,10 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/usernameInput"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
         android:hint="Username"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_above="@+id/passwordInput"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -26,17 +25,17 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordInput"
-        android:layout_below="@+id/usernameInput"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
         android:hint="Password"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_above="@+id/imageViewMainMenu"
+        android:layout_alignLeft="@+id/usernameInput"
+        android:layout_alignStart="@+id/usernameInput"
+        android:layout_marginBottom="20dp" />
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewMainMenu"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/logoalpha"
@@ -47,12 +46,13 @@
         android:layout_height="wrap_content"
         android:text="Sign in"
         android:id="@+id/buttonSignin"
-        android:layout_above="@+id/buttonRegister"
+        android:onClick="onButtonClick"
+        android:layout_below="@+id/imageViewMainMenu"
         android:layout_alignRight="@+id/passwordInput"
         android:layout_alignEnd="@+id/passwordInput"
         android:layout_alignLeft="@+id/passwordInput"
         android:layout_alignStart="@+id/passwordInput"
-        android:onClick="onButtonClick" />
+        android:layout_marginTop="20dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -60,8 +60,7 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/buttonRegister"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="73dp"
-        android:onClick="onButtonClick" />
+        android:onClick="onButtonClick"
+        android:layout_below="@+id/buttonSignin"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

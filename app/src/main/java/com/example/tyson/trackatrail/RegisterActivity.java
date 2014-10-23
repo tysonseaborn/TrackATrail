@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends TrackATrail {
     EditText etFirstName, etLastName, etUsername, etPassword, etConfirm, etEmail;
     DBAdapter db;
 

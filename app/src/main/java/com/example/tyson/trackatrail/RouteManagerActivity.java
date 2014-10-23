@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class RouteManagerActivity extends TrackATrail {
 
     String inUsername;
     User user;
+    TextView tvNoRoutes;
     private ListView lv;
 
     @Override
@@ -55,6 +57,11 @@ public class RouteManagerActivity extends TrackATrail {
 
             } while(routeCursor.moveToNext());
         }
+        else {
+            tvNoRoutes = (TextView) findViewById(R.id.textViewNoRoutes);
+            tvNoRoutes.setText("No routes found");
+        }
+
 
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
@@ -63,6 +70,7 @@ public class RouteManagerActivity extends TrackATrail {
                 this,
                 android.R.layout.simple_list_item_1,
                 routeArray );
+
 
         lv.setAdapter(arrayAdapter);
 

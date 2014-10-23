@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ProfileMenuActivity extends Activity {
+public class ProfileMenuActivity extends TrackATrail {
     boolean updateValid;
     DBAdapter db;
     User user;

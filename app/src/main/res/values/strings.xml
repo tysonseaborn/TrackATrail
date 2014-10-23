@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">TrackATrail</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_about">About</string>
     <string name="about_tyson">Tyson Seaborn</string>
@@ -40,11 +39,11 @@
 
     <!-- Main Menu strings -->
     <string name="title_activity_main_menu">Main Menu</string>
-    <string name="mainmenu">TrackATrail Main Menu</string>
+    <string name="mainmenu">Main Menu</string>
     <string name="myprofile">Profile</string>
     <string name="myroutes">My Routes</string>
     <string name="mysettings">Settings</string>
-    <string name="title_activity_profile_menu">ProfileMenuActivity</string>
+    <string name="title_activity_profile_menu">Profile</string>
 
     <!-- Password Popup strings -->
     <string name="passpopuppassword">Enter Password:</string>

@@ -8,41 +8,46 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.tyson.trackatrail.MainMenuActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/mainmenu"
-        android:id="@+id/mainMenuTextView"
-        android:singleLine="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:id="@+id/imageViewMainMenu"
+        android:background="@drawable/logoalpha"
+        android:layout_above="@+id/btnProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/myprofile"
         android:id="@+id/btnProfile"
-        android:layout_below="@+id/mainMenuTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp"
-        android:onClick="onButtonClick" />
+        android:onClick="onButtonClick"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/btnMyRoutes"
+        android:layout_alignEnd="@+id/btnMyRoutes"
+        android:layout_alignLeft="@+id/btnMyRoutes"
+        android:layout_alignStart="@+id/btnMyRoutes" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/myroutes"
         android:id="@+id/btnMyRoutes"
+        android:onClick="onButtonClick"
         android:layout_below="@+id/btnProfile"
-        android:layout_centerHorizontal="true"
-        android:onClick="onButtonClick" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mysettings"
         android:id="@+id/btnSettings"
+        android:singleLine="false"
         android:layout_below="@+id/btnMyRoutes"
-        android:layout_centerHorizontal="true"
-        android:singleLine="false" />
+        android:layout_alignLeft="@+id/btnMyRoutes"
+        android:layout_alignStart="@+id/btnMyRoutes"
+        android:layout_alignRight="@+id/btnMyRoutes"
+        android:layout_alignEnd="@+id/btnMyRoutes" />
+
 </RelativeLayout>
