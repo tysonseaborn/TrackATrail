@@ -62,11 +62,7 @@
         </activity>
         <activity
             android:name=".RouteManagerActivity"
-            android:label="@string/route_manager"
-            android:parentActivityName=".TrackATrail" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tyson.trackatrail.TrackATrail" />
+            android:label="@string/route_manager">
         </activity>
         <activity
             android:name=".MainMenuActivity"

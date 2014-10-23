@@ -48,6 +48,7 @@
         android:layout_alignLeft="@+id/btnMyRoutes"
         android:layout_alignStart="@+id/btnMyRoutes"
         android:layout_alignRight="@+id/btnMyRoutes"
-        android:layout_alignEnd="@+id/btnMyRoutes" />
+        android:layout_alignEnd="@+id/btnMyRoutes"
+        android:onClick="onButtonClick" />
 
 </RelativeLayout>
