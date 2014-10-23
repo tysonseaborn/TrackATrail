@@ -3,7 +3,6 @@ package com.example.tyson.trackatrail;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;

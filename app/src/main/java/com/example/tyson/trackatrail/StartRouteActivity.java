@@ -93,8 +93,10 @@ public class StartRouteActivity  extends TrackATrail implements
 
             // Enable MyLocation Button in the Map
             map.setMyLocationEnabled(true);
-            map.getUiSettings().setAllGesturesEnabled(false);
-            map.getUiSettings().setZoomControlsEnabled(false);
+            //map.getUiSettings().setAllGesturesEnabled(false);
+            //map.getUiSettings().setZoomControlsEnabled(false);
+            map.getUiSettings().setAllGesturesEnabled(true);
+            map.getUiSettings().setZoomControlsEnabled(true);
             locationArray = new ArrayList<Location>();
             // Create the LocationRequest object
             mLocationRequest = LocationRequest.create();

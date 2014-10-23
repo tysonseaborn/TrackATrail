@@ -27,12 +27,13 @@ import java.util.List;
 public class SaveRouteActivity extends TrackATrail {
 
     EditText etName, etDescription;
-    TextView tvDistance, tvTime;
+    TextView tvDistance;
     Spinner sItems;
     User user;
     DBAdapter db;
     double[] latitudes;
     double[] longitudes;
+    String inUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class SaveRouteActivity extends TrackATrail {
         db = new DBAdapter(this);
 
         db.open();
-        String inUsername = getIntent().getExtras().getString("username");
+        inUsername = getIntent().getExtras().getString("username");
         latitudes = getIntent().getExtras().getDoubleArray("latitudes");
         longitudes = getIntent().getExtras().getDoubleArray("longitutudes");
 
@@ -77,9 +78,8 @@ public class SaveRouteActivity extends TrackATrail {
         etDescription = (EditText)findViewById(R.id.editTextRouteDescription);
         sItems = (Spinner)findViewById(R.id.spinnerRouteType);
         tvDistance = (TextView)findViewById(R.id.textViewRouteDistance);
-        tvTime = (TextView)findViewById(R.id.textViewRouteTime);
 
-        // check passwords are same and that all fields are filled out
+        // check that all fields are filled out
         if(!etName.getText().toString().equals("") &&
                 !etDescription.getText().toString().equals("")) {
 
@@ -91,8 +91,6 @@ public class SaveRouteActivity extends TrackATrail {
                 route.description = etDescription.getText().toString();
                 route.type = sItems.getSelectedItem().toString();
                 route.distance = tvDistance.getText().toString();
-                route.time = tvTime.getText().toString();
-                
                 int id = db.insertRoute(route);
                 route.route_ID = String.valueOf(id);
                 db.close();
@@ -125,6 +123,7 @@ public class SaveRouteActivity extends TrackATrail {
                     // Return to route manager
                     Intent i = new Intent(this, RouteManagerActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i.putExtra("username", inUsername);
                     startActivity(i);
                     finish();
                 }
@@ -146,24 +145,4 @@ public class SaveRouteActivity extends TrackATrail {
         inputStream.close();
         outputStream.close();
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.save_route, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

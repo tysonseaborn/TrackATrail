@@ -23,7 +23,7 @@ public class DBAdapter {
     static final String DATABASE_CREATE_ROUTES =
             "create table routes (id integer primary key autoincrement, user_id integer not null, "
                     + "name text not null, description text not null, type text not null,"
-                    + "distance text not null, time text not null, FOREIGN KEY(user_id) REFERENCES users(id));";
+                    + "distance text not null, FOREIGN KEY(user_id) REFERENCES users(id));";
 
     final Context context;
     DatabaseHelper DBHelper;
@@ -137,7 +137,6 @@ public class DBAdapter {
         values.put(Route.KEY_description, route.description);
         values.put(Route.KEY_type, route.type);
         values.put(Route.KEY_distance, route.distance);
-        values.put(Route.KEY_time, route.time);
 
         long route_id = db.insert(DATABASE_TABLE_ROUTES, null, values);
         return (int) route_id;
@@ -152,8 +151,8 @@ public class DBAdapter {
     //---retrieves all the routes---
     public Cursor getAllRoutes()
     {
-        return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_USER_ID, Route.KEY_name, Route.KEY_description,
-                Route.KEY_type, Route.KEY_distance, Route.KEY_time}, null, null, null, null, null, null);
+        return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_name, Route.KEY_description,
+                Route.KEY_type, Route.KEY_distance}, null, null, null, null, null);
     }
 
     /*** DOES NOT WORK CURRENTLY ***
@@ -180,7 +179,6 @@ public class DBAdapter {
         values.put(Route.KEY_description, route.description);
         values.put(Route.KEY_type, route.type);
         values.put(Route.KEY_distance, route.distance);
-        values.put(Route.KEY_time, route.time);
 
         return db.update(DATABASE_TABLE_ROUTES, values, User.KEY_ID + "=" + route.route_ID, null) > 0;
     }
@@ -193,7 +191,6 @@ public class DBAdapter {
         route.description = c.getString(2);
         route.type = c.getString(3);
         route.distance = c.getString(4);
-        route.time = c.getString(5);
 
         return route;
     }
