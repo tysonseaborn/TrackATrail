@@ -94,7 +94,7 @@ public class SaveRouteActivity extends TrackATrail {
                 int id = db.insertRoute(route);
                 route.route_ID = String.valueOf(id);
                 db.close();
-                Toast.makeText(this, "Before locations", Toast.LENGTH_LONG);
+
                 if (id > 0) {
                     for (int i = 0; i < latitudes.length; i++) {
                         db.open();
@@ -108,7 +108,7 @@ public class SaveRouteActivity extends TrackATrail {
                         db.close();
                     }
                 }
-                Toast.makeText(this, "After locations", Toast.LENGTH_LONG);
+
                 if (id < 0 ) {
                     Toast.makeText(this, "Route not added", Toast.LENGTH_SHORT).show();
                 }
