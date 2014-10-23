@@ -149,11 +149,11 @@ public class DBAdapter {
         return db.delete(DATABASE_TABLE_ROUTES, Route.KEY_ID + "=" + rowId, null) > 0;
     }
 
-    //---retrieves all the contacts---
+    //---retrieves all the routes---
     public Cursor getAllRoutes()
     {
-        return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_name, Route.KEY_description,
-                Route.KEY_type, Route.KEY_distance, Route.KEY_time}, null, null, null, null, null);
+        return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_USER_ID, Route.KEY_name, Route.KEY_description,
+                Route.KEY_type, Route.KEY_distance, Route.KEY_time}, null, null, null, null, null, null);
     }
 
     /*** DOES NOT WORK CURRENTLY ***

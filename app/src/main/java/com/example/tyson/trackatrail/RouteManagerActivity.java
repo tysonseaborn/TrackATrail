@@ -3,16 +3,24 @@ package com.example.tyson.trackatrail;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RouteManagerActivity extends TrackATrail {
 
     String inUsername;
     User user;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +41,47 @@ public class RouteManagerActivity extends TrackATrail {
             } while(c.moveToNext());
         }
 
+        // Set list view of saved routes
+        setContentView(R.layout.activity_route_manager);
+
+        lv = (ListView) findViewById(R.id.routeListView);
+        List<String> routeArray = new ArrayList<String>();
+
+        Cursor routeCursor = db.getAllRoutes();
+
+        if (routeCursor.moveToFirst()) {
+            do {
+                int routeName = routeCursor.getColumnIndex("name");
+                routeArray.add(routeCursor.getString(routeName));
+
+            } while(routeCursor.moveToNext());
+        }
+
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                routeArray );
+
+        lv.setAdapter(arrayAdapter);
+
         db.close();
 
-        setContentView(R.layout.activity_route_manager);
+        // List view item click
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(RouteManagerActivity.this, SavedRouteActivity.class);
+                String routeID = lv.getItemAtPosition(position).toString();
+                intent.putExtra("routeID", routeID);
+                startActivity(intent);
+            }
+
+        });
+
     }
 
 //    @Override

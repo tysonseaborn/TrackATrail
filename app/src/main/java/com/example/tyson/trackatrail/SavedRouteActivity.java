@@ -1,17 +1,60 @@
 package com.example.tyson.trackatrail;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class SavedRouteActivity extends TrackATrail {
 
+//    TextView tvName;
+//    TextView tvType;
+//    TextView tvDescription;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String routeName = "";
+        String routeType = "";
+        String routeDescription = "";
+
         setContentView(R.layout.activity_saved_route);
+
+        String inRouteID = getIntent().getExtras().getString("routeID");
+
+//        Cursor routeCursor = db.getAllRoutes();
+
+//        tvName = (TextView)findViewById(R.id.textViewSavedRouteName);
+//        //tvType = (TextView)findViewById(R.id.textViewSavedRouteName);
+//        tvDescription = (TextView)findViewById(R.id.editTextRouteDescription);
+
+//        if (routeCursor.moveToFirst()) {
+//            do {
+//                Route refRoute = db.RetrieveRoute(routeCursor);
+//
+//
+//                if (refRoute.route_ID.equals(inRouteID)) {
+//
+//                    routeName = refRoute.name;
+//                    //routeType = refRoute.type;
+//                    routeDescription = refRoute.description;
+//
+//                    break;
+//                }
+//
+//
+//
+//            } while(routeCursor.moveToNext());
+//        }
+
+//        tvName.setText(routeName);
+//        tvDescription.setText(routeDescription);
+
     }
 
 
