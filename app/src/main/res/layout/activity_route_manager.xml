@@ -10,10 +10,10 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
         android:layout_alignParentLeft="true"
         android:weightSum="1">
 
@@ -24,32 +24,24 @@
             android:id="@+id/textViewNoRoutes" />
 
         <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="401dp"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
             android:id="@+id/routeListView"
             android:layout_weight="0.41"
             android:entries="@array/routeListRange"
-            android:clickable="false" />
+            android:clickable="true" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <Button
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAlignment="center"
-        android:clickable="false">
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/routemgr_startnewroute"
-            android:id="@+id/btnStartNewRoute"
-            android:layout_below="@+id/spinner"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="bottom"
-            android:onClick="onButtonClick" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="@string/routemgr_startnewroute"
+        android:id="@+id/btnStartNewRoute"
+        android:layout_gravity="bottom"
+        android:onClick="onButtonClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false" />
 
 </RelativeLayout>
