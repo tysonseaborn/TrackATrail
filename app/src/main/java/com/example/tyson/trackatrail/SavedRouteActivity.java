@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +21,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +38,9 @@ public class SavedRouteActivity extends TrackATrail {
     Spinner sItems;
     String inUsername, inRouteName;
     EditText etRouteName, etRouteDesc;
+
+    //Map Properties
+    GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +106,34 @@ public class SavedRouteActivity extends TrackATrail {
         etRouteDesc.setEnabled(false);
         sItems.setClickable(false);
 
+        initMap(db.getAllLocationsById(route.route_ID));
         db.close();
+
+    }
+
+    public void initMap(RouteLocation[] rlArray) {
+        // Initializing
+        // Getting reference to SupportMapFragment of the activity_main
+        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        // Getting Map for the SupportMapFragment
+        map = fm.getMap();
+
+        if (map != null) {
+            // Enable MyLocation Button in the Map
+            map.setMyLocationEnabled(true);
+            map.getUiSettings().setAllGesturesEnabled(false);
+            map.getUiSettings().setZoomControlsEnabled(false);
+
+
+            for (int i = 0; i < rlArray.length -1; i++) {
+                map.addPolyline(new PolylineOptions()
+                        .add(new LatLng(rlArray[i].latitude, rlArray[i].longitude),
+                                new LatLng(rlArray[i+1].latitude, rlArray[i+1].longitude))
+                        .width(5)
+                        .color(Color.MAGENTA).geodesic(true));
+            }
+        }
     }
 
     public void onButtonClick(View view) {
