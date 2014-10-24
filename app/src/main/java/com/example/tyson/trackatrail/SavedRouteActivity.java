@@ -21,9 +21,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -125,14 +128,23 @@ public class SavedRouteActivity extends TrackATrail {
             map.getUiSettings().setAllGesturesEnabled(false);
             map.getUiSettings().setZoomControlsEnabled(false);
 
-
-            for (int i = 0; i < rlArray.length -1; i++) {
-                map.addPolyline(new PolylineOptions()
-                        .add(new LatLng(rlArray[i].latitude, rlArray[i].longitude),
-                                new LatLng(rlArray[i+1].latitude, rlArray[i+1].longitude))
-                        .width(5)
-                        .color(Color.MAGENTA).geodesic(true));
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            int swag = 0;
+            for (int i = 0; i < rlArray.length; i++) {
+                if (i < (rlArray.length-1)) {
+                    map.addPolyline(new PolylineOptions()
+                            .add(new LatLng(rlArray[i].latitude, rlArray[i].longitude),
+                                    new LatLng(rlArray[i + 1].latitude, rlArray[i + 1].longitude))
+                            .width(5)
+                            .color(Color.MAGENTA).geodesic(true));
+                }
+                LatLng ll = new LatLng(rlArray[i].latitude, rlArray[i].longitude);
+                builder.include(ll);
             }
+            LatLngBounds bounds = builder.build();
+
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 0);
+            map.moveCamera(cu);
         }
     }
 
