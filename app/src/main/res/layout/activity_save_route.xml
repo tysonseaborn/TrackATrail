@@ -13,69 +13,111 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/routename"
-            android:ems="10"
-            android:maxLength="50"
-            android:id="@+id/editTextRouteName" />
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="25dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:inputType="textCapSentences"
-            android:hint="@string/routedescription"
-            android:ems="10"
-            android:maxLength="250"
-            android:id="@+id/editTextRouteDescription" />
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="25dp" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerRouteType" />
-
-        <Space
-            android:layout_width="25dp"
-            android:layout_height="25dp" />
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView" >
 
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView"
-                android:text="@string/routedistance" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-            <Space
-                android:layout_width="100dp"
-                android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editroutetitle"
+                    android:id="@+id/textView2"
+                    android:textSize="20dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="343km"
-                android:id="@+id/textViewRouteDistance" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/routename"
+                    android:ems="10"
+                    android:maxLength="50"
+                    android:id="@+id/editTextRouteName" />
 
-        </LinearLayout>
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/space" />
 
-        <Space
-            android:layout_width="20px"
-            android:layout_height="30dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editroutedescription"
+                    android:id="@+id/textView3"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/routedescription"
+                    android:ems="10"
+                    android:maxLength="250"
+                    android:id="@+id/editTextRouteDescription"
+                    android:lines="5"
+                    android:singleLine="false" />
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="25dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editroutecategory"
+                        android:id="@+id/textView4"
+                        android:singleLine="false"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinnerRouteType"
+                        android:layout_marginLeft="100dp"/>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/textView"
+                        android:text="@string/routedistance"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="343km"
+                        android:id="@+id/textViewRouteDistance"
+                        android:layout_marginLeft="45dp"/>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="20px"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+        </ScrollView>
 
         <Button
             android:layout_width="fill_parent"

@@ -34,7 +34,6 @@
     <string name="routedescription">Route Description</string>
     <string name="routecctivity">Route Activity</string>
     <string name="routedistance">Route Distance:</string>
-    <string name="routetime">Route Time:</string>
     <string name="routeSave">Save Route</string>
 
     <!-- Main Menu strings -->
@@ -59,5 +58,7 @@
 
     <!-- Saved Route strings -->
     <string name="editroute">Edit Route Info</string>
-
+    <string name="editroutecategory">Category:</string>
+    <string name="editroutetitle">Title:</string>
+    <string name="editroutedescription">Description:</string>
 </resources>

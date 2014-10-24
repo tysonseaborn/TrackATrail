@@ -14,14 +14,30 @@
         android:layout_height="fill_parent"
         android:weightSum="1">
 
-        <EditText
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etRouteTitle"
-            android:hint="Saved Route Title"
-            android:maxLength="50"
-            android:textColor="#ff000000"
-            android:textSize="25dp"/>
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/editroutetitle"
+                android:id="@+id/textView3"
+                android:singleLine="false"
+                android:textSize="20dp"
+                android:layout_weight="0.35" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/etRouteTitle"
+                android:hint="Saved Route Title"
+                android:maxLength="50"
+                android:textColor="#ffffffff"
+                android:textSize="25dp"/>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -43,19 +59,42 @@
                     class="com.google.android.gms.maps.SupportMapFragment"
                     tools:layout="@layout/activity_saved_route" />s
 
-                <Spinner
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:text="@string/editroutecategory"
+                        android:id="@+id/textView"
+                        android:textSize="20dp"
+                        android:layout_weight="0.50" />
+
+                    <Spinner
+                        android:layout_width="204dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinnerEditRouteType" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="139dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinnerEditRouteType" />
+                    android:text="@string/editroutedescription"
+                    android:id="@+id/textView2"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/editTextSavedRouteDesc"
                     android:inputType="textCapSentences"
+                    android:lines="5"
                     android:maxLength="250"
                     android:textSize="25dp"
-                    android:textColor="#ff000000"
+                    android:textColor="#ffffffff"
                     android:hint="Description of saved route."/>
 
             </LinearLayout>

@@ -105,7 +105,6 @@ public class ProfileMenuActivity extends TrackATrail {
         // User wants to edit their information
         if(btnUporSub.getText().toString().equals("Update")) {
             // Set their information to be editable
-            etUsername.setEnabled(true);
             etFirstName.setEnabled(true);
             etLastName.setEnabled(true);
             etEmail.setEnabled(true);
@@ -121,7 +120,6 @@ public class ProfileMenuActivity extends TrackATrail {
             // Empty check
             if(etFirstName.getText().toString().equals("") ||
                     etLastName.getText().toString().equals("") ||
-                    etUsername.getText().toString().equals("") ||
                     etEmail.getText().toString().equals("")) {
                 // A field is empty
                 Toast.makeText(this,"Please enter data in all fields",Toast.LENGTH_SHORT).show();
@@ -129,8 +127,7 @@ public class ProfileMenuActivity extends TrackATrail {
             }
             else {
                 // Space check
-                if (etUsername.getText().toString().contains(" ") ||
-                        etFirstName.getText().toString().contains(" ") ||
+                if (etFirstName.getText().toString().contains(" ") ||
                         etLastName.getText().toString().contains(" ") ||
                         etEmail.getText().toString().contains(" ")) {
                     // Space exists in any field
@@ -157,7 +154,6 @@ public class ProfileMenuActivity extends TrackATrail {
     // Update the user if all checks are valid
     private void updateUser() {
         if(updateValid) { // Validated password
-            user.username = etUsername.getText().toString();
             user.firstname = etFirstName.getText().toString();
             user.lastname = etLastName.getText().toString();
             user.email = etEmail.getText().toString();
@@ -171,7 +167,6 @@ public class ProfileMenuActivity extends TrackATrail {
             Toast.makeText(this, "User " + user.username + " updated",Toast.LENGTH_LONG).show();
 
             // Reset fields, button, etc., to default values
-            etUsername.setEnabled(false);
             etFirstName.setEnabled(false);
             etLastName.setEnabled(false);
             etEmail.setEnabled(false);

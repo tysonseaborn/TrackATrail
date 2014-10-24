@@ -33,13 +33,23 @@
         android:layout_marginBottom="20dp" />
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imageViewMainMenu"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/logoalpha"
+        android:background="@drawable/trackatrailbanner"
         android:alpha="100" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/buttonRegister"
+        android:onClick="onButtonClick"
+        android:layout_below="@+id/buttonSignin"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -54,13 +64,4 @@
         android:layout_alignStart="@+id/passwordInput"
         android:layout_marginTop="20dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/buttonRegister"
-        android:onClick="onButtonClick"
-        android:layout_below="@+id/buttonSignin"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>
