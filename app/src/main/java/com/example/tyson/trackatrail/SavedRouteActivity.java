@@ -84,7 +84,7 @@ public class SavedRouteActivity extends TrackATrail {
             } while(c.moveToNext());
         }
 
-        Cursor routeCursor = db.getAllRoutes();
+        Cursor routeCursor = db.getAllRoutesForUser(user.user_ID.toString());
         if (routeCursor.moveToFirst()) {
             do {
                 Route refRoute = db.RetrieveRoute(routeCursor);

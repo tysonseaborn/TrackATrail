@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 public class DBAdapter {
     static final String DATABASE_NAME = "TrackATrailData";
     static final String DATABASE_TABLE = "users";
@@ -170,40 +168,6 @@ public class DBAdapter {
                 Route.KEY_type, Route.KEY_distance}, whereClause, new String[]{id}, null, null, null);
     }
 
-    // ------------------------------------------------------------------------
-    //Location Database Methods
-    public int insertLocation(RouteLocation loc) {
-        ContentValues values = new ContentValues();
-        values.put(RouteLocation.KEY_ROUTE_ID, loc.route_ID);
-        values.put(RouteLocation.KEY_lat, loc.latitude);
-        values.put(RouteLocation.KEY_long, loc.longitude);
-
-        long route_id = db.insert(DATABASE_TABLE_ROUTE_LOCATIONS, null, values);
-        return (int) route_id;
-    }
-
-    public RouteLocation[] getAllLocationsById(String id) {
-
-        Cursor c = db.query(DATABASE_TABLE_ROUTE_LOCATIONS, new String[] {RouteLocation.KEY_ID, RouteLocation.KEY_ROUTE_ID,
-        RouteLocation.KEY_lat, RouteLocation.KEY_long}, null, null, null, null, null);
-        ArrayList<RouteLocation> rlList = new ArrayList<RouteLocation>();
-
-        if (c.moveToFirst()) {
-            do {
-                RouteLocation rl = new RouteLocation();
-                rl.location_ID = c.getString(0);
-                rl.route_ID = c.getString(1);
-                rl.latitude = c.getFloat(2);
-                rl.longitude = c.getFloat(3);
-                rlList.add(rl);
-            } while(c.moveToNext());
-
-        }
-
-        return rlList.toArray(new RouteLocation[rlList.size()]);
-    }
-
-    // Updates a user
     public boolean updateRoute(Route route)
     {
         ContentValues values = new ContentValues();
@@ -220,11 +184,24 @@ public class DBAdapter {
     {
         Route route = new Route();
         route.route_ID = c.getString(0);
-        route.name = c.getString(1);
-        route.description = c.getString(2);
-        route.type = c.getString(3);
-        route.distance = c.getString(4);
+        route.user_ID = c.getString(1);
+        route.name = c.getString(2);
+        route.description = c.getString(3);
+        route.type = c.getString(4);
+        route.distance = c.getString(5);
 
         return route;
+    }
+
+    // ------------------------------------------------------------------------
+    //Location Database Methods
+    public int insertLocation(RouteLocation loc) {
+        ContentValues values = new ContentValues();
+        values.put(RouteLocation.KEY_ROUTE_ID, loc.route_ID);
+        values.put(RouteLocation.KEY_lat, loc.latitude);
+        values.put(RouteLocation.KEY_long, loc.longitude);
+
+        long route_id = db.insert(DATABASE_TABLE_ROUTE_LOCATIONS, null, values);
+        return (int) route_id;
     }
 }

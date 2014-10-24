@@ -28,7 +28,8 @@
             android:layout_height="401dp"
             android:id="@+id/routeListView"
             android:layout_weight="0.41"
-            android:entries="@array/routeListRange" />
+            android:entries="@array/routeListRange"
+            android:clickable="false" />
 
     </LinearLayout>
 
@@ -36,7 +37,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:textAlignment="center">
+        android:textAlignment="center"
+        android:clickable="false">
 
         <Button
             android:layout_width="fill_parent"
