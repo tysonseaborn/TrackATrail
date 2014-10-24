@@ -93,6 +93,8 @@ public class SaveRouteActivity extends TrackATrail {
         spinnerArray.add("Cycling");
         spinnerArray.add("Roller Blading");
 
+        routeDistance = Math.cos(routeDistance) * 100;
+
         tvDistance = (TextView)findViewById(R.id.textViewRouteDistance);
         tvDistance.setText(df.format(routeDistance) + "km");
 
