@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +15,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +47,12 @@ public class SaveRouteActivity extends TrackATrail {
     double[] latitudes;
     double[] longitudes;
     String inUsername;
+    double routeDistance;
+    double pointOne;
+    double pointTwo;
+    double longitude;
+
+    DecimalFormat df = new DecimalFormat("#.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +77,14 @@ public class SaveRouteActivity extends TrackATrail {
             } while(c.moveToNext());
         }
 
+        db.close();
+
+        // Calculate distance travelled
+        pointOne = 90 - latitudes[0];
+        pointTwo = 90 - latitudes[latitudes.length - 1];
+        longitude = longitudes[0] - longitudes[longitudes.length - 1];
+
+        routeDistance = ((Math.cos(pointOne)*Math.cos(pointTwo)) + (Math.sin(pointOne)*Math.sin(pointTwo)*Math.sin(longitude)));
 
         // you need to have a list of data that you want the spinner to display
         List<String> spinnerArray =  new ArrayList<String>();
@@ -65,6 +92,9 @@ public class SaveRouteActivity extends TrackATrail {
         spinnerArray.add("Jogging");
         spinnerArray.add("Cycling");
         spinnerArray.add("Roller Blading");
+
+        tvDistance = (TextView)findViewById(R.id.textViewRouteDistance);
+        tvDistance.setText(df.format(routeDistance) + "km");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -89,7 +119,7 @@ public class SaveRouteActivity extends TrackATrail {
                 route.name = etName.getText().toString().trim();
                 route.description = etDescription.getText().toString().trim();
                 route.type = sItems.getSelectedItem().toString();
-                route.distance = tvDistance.getText().toString();
+                route.distance = String.valueOf(routeDistance);
                 int id = db.insertRoute(route);
                 route.route_ID = String.valueOf(id);
                 db.close();
@@ -158,6 +188,57 @@ public class SaveRouteActivity extends TrackATrail {
         inputStream.close();
         outputStream.close();
     }
+
+    private double getDistance(double origin1, double origin2, double dest1, double dest2) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Double dist = 0.0;
+        try {
+
+            String url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin1 + "," + origin2 + "&destination=" + dest1 + "," + dest2 + "&mode=walking";
+
+            HttpPost httppost = new HttpPost(url);
+
+            HttpClient client = new DefaultHttpClient();
+            HttpResponse response;
+            stringBuilder = new StringBuilder();
+
+
+            response = client.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            InputStream stream = entity.getContent();
+            int b;
+            while ((b = stream.read()) != -1) {
+                stringBuilder.append((char) b);
+            }
+        } catch (ClientProtocolException e) {
+        } catch (IOException e) {
+        }
+
+        JSONObject jsonObject;
+        try {
+
+            jsonObject = new JSONObject(stringBuilder.toString());
+
+            JSONArray array = jsonObject.getJSONArray("routes");
+
+            JSONObject routes = array.getJSONObject(0);
+
+            JSONArray legs = routes.getJSONArray("legs");
+
+            JSONObject steps = legs.getJSONObject(0);
+
+            JSONObject distance = steps.getJSONObject("distance");
+
+            Log.i("Distance:", distance.toString());
+            dist = Double.parseDouble(distance.getString("text").replaceAll("[^\\.0123456789]","") );
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return dist;
+    }
+
 
 
 //    @Override
