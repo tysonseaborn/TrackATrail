@@ -73,7 +73,7 @@ public class RouteManagerActivity extends TrackATrail {
         lv.setAdapter(null); // clear
         List<String> routeArray = new ArrayList<String>();
 
-        Cursor routeCursor = db.getAllRoutes();
+        Cursor routeCursor = db.getAllRoutesForUser(user.user_ID.toString());
         if (routeCursor.moveToFirst()) {
             do {
                 int routeName = routeCursor.getColumnIndex("name");
