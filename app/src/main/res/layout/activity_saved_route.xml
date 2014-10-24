@@ -57,7 +57,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     class="com.google.android.gms.maps.SupportMapFragment"
-                    tools:layout="@layout/activity_saved_route" />s
+                    tools:layout="@layout/activity_saved_route" />
 
                 <LinearLayout
                     android:orientation="horizontal"
