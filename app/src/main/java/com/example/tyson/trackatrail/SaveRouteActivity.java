@@ -79,12 +79,13 @@ public class SaveRouteActivity extends TrackATrail {
 
         db.close();
 
-        // Calculate distance travelled
-        pointOne = 90 - latitudes[0];
-        pointTwo = 90 - latitudes[latitudes.length - 1];
-        longitude = longitudes[0] - longitudes[longitudes.length - 1];
+        for (int i = 0; i < longitudes.length-1; i++) {
+            pointOne = 90 - latitudes[i];
+            pointTwo = 90 - latitudes[i+1];
+            longitude = longitudes[i] - longitudes[i+1];
 
-        routeDistance = ((Math.cos(pointOne)*Math.cos(pointTwo)) + (Math.sin(pointOne)*Math.sin(pointTwo)*Math.sin(longitude)));
+            routeDistance += ((Math.cos(pointOne)*Math.cos(pointTwo)) + (Math.sin(pointOne)*Math.sin(pointTwo)*Math.sin(longitude)));
+        }
 
         // you need to have a list of data that you want the spinner to display
         List<String> spinnerArray =  new ArrayList<String>();
@@ -93,7 +94,7 @@ public class SaveRouteActivity extends TrackATrail {
         spinnerArray.add("Cycling");
         spinnerArray.add("Roller Blading");
 
-        routeDistance = Math.cos(routeDistance) * 100;
+        routeDistance = Math.cos(routeDistance) / 100;
 
         tvDistance = (TextView)findViewById(R.id.textViewRouteDistance);
         tvDistance.setText(df.format(routeDistance) + "km");
