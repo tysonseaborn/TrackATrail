@@ -207,13 +207,14 @@ public class StartRouteActivity  extends TrackATrail implements
 
                     Intent iSave = new Intent(this, SaveRouteActivity.class);
                     iSave.putExtra("username", inUsername);
-                    double[] latitudes = new double[5];
-                    double[] longitudes = new double[5];
+                    double[] latitudes = new double[completedRouteArray.size()];
+                    double[] longitudes = new double[completedRouteArray.size()];
 
-                   /*( for (int i = 0; i < completedRouteArray.size(); i++) {
-                        latitudes.add(completedRouteArray.get(i).getLatitude());
-                        longitudes.add(completedRouteArray.get(i).getLongitude());
-                    }*/
+                    for (int i = 0; i < completedRouteArray.size(); i++) {
+                        latitudes[i] = completedRouteArray.get(i).getLatitude();
+                        longitudes[i] = completedRouteArray.get(i).getLongitude();
+                    }
+                    /*
                     latitudes[0] = 43.01186;
                     latitudes[1] = 43.01192;
                     latitudes[2] = 43.01223;
@@ -221,10 +222,10 @@ public class StartRouteActivity  extends TrackATrail implements
                     latitudes[4] = 43.01267;
 
                     longitudes[0] = -81.21094;
-                    longitudes[1] =-81.21042;
+                    longitudes[1] = -81.21042;
                     longitudes[2] = -81.20948;
                     longitudes[3] = -81.20776;
-                    longitudes[4] = -81.20682;
+                    longitudes[4] = -81.20682; */
 
                     iSave.putExtra("latitudes", latitudes);
                     iSave.putExtra("longitudes", longitudes);
