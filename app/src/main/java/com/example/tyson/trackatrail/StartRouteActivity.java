@@ -168,7 +168,6 @@ public class StartRouteActivity  extends TrackATrail implements
         }
     }
 
-
     @Override
     public void onDisconnected() {
 

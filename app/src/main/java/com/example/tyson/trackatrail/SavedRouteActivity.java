@@ -124,12 +124,10 @@ public class SavedRouteActivity extends TrackATrail {
 
         if (map != null) {
             // Enable MyLocation Button in the Map
-            map.setMyLocationEnabled(true);
+            map.setMyLocationEnabled(false);
             map.getUiSettings().setAllGesturesEnabled(false);
             map.getUiSettings().setZoomControlsEnabled(false);
 
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            int swag = 0;
             for (int i = 0; i < rlArray.length; i++) {
                 if (i < (rlArray.length-1)) {
                     map.addPolyline(new PolylineOptions()
@@ -138,13 +136,17 @@ public class SavedRouteActivity extends TrackATrail {
                             .width(5)
                             .color(Color.MAGENTA).geodesic(true));
                 }
-                LatLng ll = new LatLng(rlArray[i].latitude, rlArray[i].longitude);
-                builder.include(ll);
-            }
-            LatLngBounds bounds = builder.build();
 
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 0);
-            map.moveCamera(cu);
+            }
+            if (rlArray.length % 2 == 0) {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(rlArray[rlArray.length/2].latitude, rlArray[rlArray.length/2].longitude), 14));
+            }
+            else {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(rlArray[(int)Math.ceil(rlArray.length/2)].latitude,
+                                rlArray[(int)Math.ceil(rlArray.length/2)].longitude), 14));
+            }
         }
     }
 
