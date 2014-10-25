@@ -1,6 +1,7 @@
 package com.example.tyson.trackatrail;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -18,7 +19,10 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -214,18 +218,6 @@ public class StartRouteActivity  extends TrackATrail implements
                         latitudes[i] = completedRouteArray.get(i).getLatitude();
                         longitudes[i] = completedRouteArray.get(i).getLongitude();
                     }
-                    /*
-                    latitudes[0] = 43.01186;
-                    latitudes[1] = 43.01192;
-                    latitudes[2] = 43.01223;
-                    latitudes[3] = 43.01255;
-                    latitudes[4] = 43.01267;
-
-                    longitudes[0] = -81.21094;
-                    longitudes[1] = -81.21042;
-                    longitudes[2] = -81.20948;
-                    longitudes[3] = -81.20776;
-                    longitudes[4] = -81.20682; */
 
                     iSave.putExtra("latitudes", latitudes);
                     iSave.putExtra("longitudes", longitudes);
@@ -243,6 +235,9 @@ public class StartRouteActivity  extends TrackATrail implements
         startedTracking = true;
 
         if(btnStart.getText().equals("Start Tracking")) {
+            map.addMarker(new MarkerOptions().position(
+                    new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude())).icon(
+            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             btnStart.setText("Stop Tracking");
             btnSave.setEnabled(false);
             currentlyTracking = true;
@@ -252,6 +247,9 @@ public class StartRouteActivity  extends TrackATrail implements
             btnSave.setEnabled(true);
             currentlyTracking = false;
             completedRouteArray = locationArray;
+            map.addMarker(new MarkerOptions().position(
+                    new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude())).icon(
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }
     }
 }
