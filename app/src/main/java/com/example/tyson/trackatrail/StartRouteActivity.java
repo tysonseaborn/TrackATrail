@@ -185,7 +185,7 @@ public class StartRouteActivity  extends TrackATrail implements
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()), 18));
 
-        if (currentlyTracking = true) {
+        if (currentlyTracking == true) {
             locationArray.add(mCurrentLocation);
             if (locationArray.size() > 2) {
                 map.addPolyline(new PolylineOptions()
