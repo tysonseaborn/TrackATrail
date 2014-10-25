@@ -1,9 +1,7 @@
 package com.example.tyson.trackatrail;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -77,6 +76,8 @@ public class ProfileMenuActivity extends TrackATrail {
         etFirstName.setEnabled(false);
         etLastName.setEnabled(false);
         etEmail.setEnabled(false);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
 
@@ -257,13 +258,11 @@ public class ProfileMenuActivity extends TrackATrail {
                         updateValid = true;
                         updateUser();
                         alertDialog.dismiss();
-                        return;
                     }
                     else {
                         // Password is not the user's password
                         updateValid = false;
                         tvPassMatch.setText("Invalid password");
-                        return;
                     }
                 }
                 else {
@@ -273,7 +272,6 @@ public class ProfileMenuActivity extends TrackATrail {
                     } else { // Passwords entered are not the same
                         tvPassMatch.setText(R.string.passnomatch);
                     }
-                    return;
                 }
 
             }

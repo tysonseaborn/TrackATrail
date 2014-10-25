@@ -58,7 +58,7 @@
                     android:ems="10"
                     android:maxLength="250"
                     android:id="@+id/editTextRouteDescription"
-                    android:lines="5"
+                    android:lines="2"
                     android:singleLine="false"
                     android:inputType="textMultiLine" />
 

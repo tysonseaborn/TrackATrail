@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,7 +48,7 @@ public class SavedRouteActivity extends TrackATrail {
     Spinner sItems;
     String inUsername, inRouteName;
     EditText etRouteName, etRouteDesc;
-    TextView tvDistance;
+    TextView tvDistance, tvInvisDesc;
 
     //Map Properties
     GoogleMap map;
@@ -64,6 +65,7 @@ public class SavedRouteActivity extends TrackATrail {
         btnEdit = (Button)findViewById(R.id.btnEditRoute);
         sItems = (Spinner) findViewById(R.id.spinnerEditRouteType);
         tvDistance = (TextView)findViewById(R.id.textViewDistance);
+        tvInvisDesc = (TextView)findViewById(R.id.textViewDescInvis);
 
         updateValid = false;
         deleteValid = false;
@@ -116,6 +118,7 @@ public class SavedRouteActivity extends TrackATrail {
         etRouteName.setText(route.name);
         tvDistance.setText(route.distance + "km");
         etRouteDesc.setText(route.description);
+        tvInvisDesc.setText(route.description);
         sItems.setSelection(adapter.getPosition(route.type));
 
         etRouteName.setEnabled(false);
@@ -124,6 +127,8 @@ public class SavedRouteActivity extends TrackATrail {
 
         initMap(db.getAllLocationsById(route.route_ID));
         db.close();
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
@@ -219,6 +224,7 @@ public class SavedRouteActivity extends TrackATrail {
                 builder.setMessage("Are you sure you want to delete this route?");
                 builder.setPositiveButton("Yes", deleteRouteListener);
                 builder.setNegativeButton("No", deleteRouteListener);
+                builder.setTitle("Delete Route");
                 builder.setIcon(R.drawable.ic_launcher);
                 builder.show();
 
@@ -229,6 +235,8 @@ public class SavedRouteActivity extends TrackATrail {
                     // Set the route information to be editable
                     etRouteName.setEnabled(true);
                     etRouteDesc.setEnabled(true);
+                    etRouteDesc.setVisibility(View.VISIBLE);
+                    tvInvisDesc.setVisibility(View.GONE);
                     sItems.setClickable(true);
 
                     // Distinguishes between the action the user wants to do
@@ -297,6 +305,9 @@ public class SavedRouteActivity extends TrackATrail {
             etRouteName.setEnabled(false);
             etRouteDesc.setEnabled(false);
             sItems.setClickable(false);
+            etRouteDesc.setVisibility(View.GONE);
+            tvInvisDesc.setText(route.description);
+            tvInvisDesc.setVisibility(View.VISIBLE);
 
             // Distinguishes between the action the user wants to do
             // User has finished editing - update button
