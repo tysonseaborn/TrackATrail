@@ -120,8 +120,7 @@
                         android:lines="5"
                         android:maxLength="250"
                         android:textSize="20dp"
-                        android:textColor="#ffffffff"
-                        android:hint="Description of saved route."/>
+                        android:textColor="#ffffffff" />
                 </LinearLayout>
 
                 <LinearLayout

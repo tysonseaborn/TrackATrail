@@ -112,7 +112,6 @@ public class SavedRouteActivity extends TrackATrail {
         tvDistance.setText(route.distance + "km");
         etRouteDesc.setText(route.description);
         sItems.setSelection(adapter.getPosition(route.type));
-        tvDistance.setText(route.distance);
 
         etRouteName.setEnabled(false);
         etRouteDesc.setEnabled(false);

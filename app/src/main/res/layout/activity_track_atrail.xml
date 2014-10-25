@@ -49,7 +49,11 @@
         android:id="@+id/buttonRegister"
         android:onClick="onButtonClick"
         android:layout_below="@+id/buttonSignin"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/buttonSignin"
+        android:layout_alignEnd="@+id/buttonSignin"
+        android:layout_alignLeft="@+id/buttonSignin"
+        android:layout_alignStart="@+id/buttonSignin"
+        android:textSize="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,6 +66,7 @@
         android:layout_alignEnd="@+id/passwordInput"
         android:layout_alignLeft="@+id/passwordInput"
         android:layout_alignStart="@+id/passwordInput"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textSize="20dp" />
 
 </RelativeLayout>
