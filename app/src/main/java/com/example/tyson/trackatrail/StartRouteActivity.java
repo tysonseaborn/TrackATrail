@@ -248,6 +248,7 @@ public class StartRouteActivity  extends TrackATrail implements
         startedTracking = true;
 
         if(btnStart.getText().equals("Start Tracking")) {
+            map.clear();
             Toast.makeText(this, "Track recording in progress!", Toast.LENGTH_LONG);
             map.addMarker(new MarkerOptions().position(
                     new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude())).icon(
