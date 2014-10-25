@@ -27,8 +27,10 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -136,6 +138,9 @@ public class SavedRouteActivity extends TrackATrail {
             map.getUiSettings().setAllGesturesEnabled(false);
             map.getUiSettings().setZoomControlsEnabled(false);
 
+            map.addMarker(new MarkerOptions().position(
+                    new LatLng(rlArray[0].latitude, rlArray[0].longitude)).icon(
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             for (int i = 0; i < rlArray.length; i++) {
                 if (i < (rlArray.length-1)) {
                     map.addPolyline(new PolylineOptions()
@@ -144,8 +149,10 @@ public class SavedRouteActivity extends TrackATrail {
                             .width(5)
                             .color(Color.MAGENTA).geodesic(true));
                 }
-
             }
+            map.addMarker(new MarkerOptions().position(
+                    new LatLng(rlArray[rlArray.length-1].latitude, rlArray[rlArray.length-1].longitude)).icon(
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             if (rlArray.length % 2 == 0) {
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                         new LatLng(rlArray[rlArray.length/2].latitude, rlArray[rlArray.length/2].longitude), 14));
