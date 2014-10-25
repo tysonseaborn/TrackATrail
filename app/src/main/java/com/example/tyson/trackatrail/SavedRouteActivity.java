@@ -32,6 +32,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+*   Name: SavedRouteActivity.java class
+*   Description: \Saved route functionality that displays the selected routes map and information to the user.
+*   The user has the option to edit the information or delete the route.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
 
 public class SavedRouteActivity extends TrackATrail {
     Button btnEdit;
@@ -51,6 +57,7 @@ public class SavedRouteActivity extends TrackATrail {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_route);
 
+        // Create object based on the gui properties
         etRouteName = (EditText)findViewById(R.id.etRouteTitle);
         etRouteDesc = (EditText)findViewById(R.id.editTextSavedRouteDesc);
         tvDistance = (TextView)findViewById(R.id.textViewDistance);
@@ -117,7 +124,6 @@ public class SavedRouteActivity extends TrackATrail {
 
         initMap(db.getAllLocationsById(route.route_ID));
         db.close();
-
     }
 
     @Override

@@ -16,6 +16,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/*
+*   Name: RegisterActivity.java class
+*   Description: Register functionality that the user fills out to create a new profile.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class RegisterActivity extends TrackATrail {
     EditText etFirstName, etLastName, etUsername, etPassword, etConfirm, etEmail;
     DBAdapter db;

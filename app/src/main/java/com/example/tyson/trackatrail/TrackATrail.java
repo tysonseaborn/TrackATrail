@@ -10,6 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/*
+*   Name: TrackATrail.java class
+*   Description: Main start up page the houses the login process,
+*   as well as the register button.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class TrackATrail extends  FragmentActivity {
     DBAdapter db;
     EditText etUsername, etPassword;
@@ -24,7 +31,6 @@ public class TrackATrail extends  FragmentActivity {
         etUsername = (EditText)findViewById(R.id.usernameInput);
         etPassword = (EditText)findViewById(R.id.passwordInput);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,7 +83,6 @@ public class TrackATrail extends  FragmentActivity {
         db.open();
 
         Cursor c = db.getAllUsers();
-
 
         if(etUsername.getText().toString().equals("") ||
                 etPassword.getText().toString().equals("")) {

@@ -1,5 +1,11 @@
 package com.example.tyson.trackatrail;
 
+/*
+*   Name: Route.java class
+*   Description: Stores the route database information.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class Route {
     public static final String KEY_ID = "id";
     public static final String KEY_USER_ID = "user_id";

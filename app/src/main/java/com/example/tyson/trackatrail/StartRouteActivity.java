@@ -25,15 +25,20 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
+/*
+*   Name: StartRouteActivity.java class
+*   Description: Start route functionality that contains start/stop button and save button clicks.
+*   This class is where all the google map functionality happens.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 
 public class StartRouteActivity  extends TrackATrail implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
-    //String userID;
     boolean startedTracking, currentlyTracking = false;
     Button btnStart, btnSave;
-    //String username;
     User user;
     String inUsername;
 
@@ -50,6 +55,7 @@ public class StartRouteActivity  extends TrackATrail implements
     private static final float DISPLACEMENT_DISTANCE =
             2.0f;
 
+    // Location object declarations
     LocationRequest mLocationRequest;
     LocationClient mLocationClient;
     Location mCurrentLocation;
@@ -63,6 +69,7 @@ public class StartRouteActivity  extends TrackATrail implements
         db.open();
         inUsername = getIntent().getExtras().getString("username");
 
+        // Find the user
         Cursor c = db.getAllUsers();
         if (c.moveToFirst()) {
             do {
@@ -76,7 +83,6 @@ public class StartRouteActivity  extends TrackATrail implements
         }
 
         db.close();
-
 
         initMap();
 
@@ -160,6 +166,8 @@ public class StartRouteActivity  extends TrackATrail implements
 
     @Override
     public void onConnected(Bundle bundle) {
+
+        // Google map connection
         if (mLocationClient != null) {
             mLocationClient.requestLocationUpdates(mLocationRequest, this);
         }
@@ -203,9 +211,11 @@ public class StartRouteActivity  extends TrackATrail implements
 
     public void onButtonClick(View view) {
         switch(view.getId()) {
+            // Start tracking
             case R.id.buttonStart:
                 manageTracking();
                 break;
+            // Save route
             case R.id.buttonSaveRoute:
                 if (completedRouteArray.size() > -1) {
 
@@ -214,23 +224,26 @@ public class StartRouteActivity  extends TrackATrail implements
                     double[] latitudes = new double[completedRouteArray.size()];
                     double[] longitudes = new double[completedRouteArray.size()];
 
+                    // Create arrays based on lat and long values of tracking
                     for (int i = 0; i < completedRouteArray.size(); i++) {
                         latitudes[i] = completedRouteArray.get(i).getLatitude();
                         longitudes[i] = completedRouteArray.get(i).getLongitude();
                     }
 
+                    // Pass lat and long arrays to save activity
                     iSave.putExtra("latitudes", latitudes);
                     iSave.putExtra("longitudes", longitudes);
                     startActivity(iSave);
                 }
                 else {
-                    Toast.makeText(this, "You need to travel further peasant!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "No distance travelled", Toast.LENGTH_LONG).show();
                 }
 
                 break;
         }
     }
 
+    // Manage the start and stop button tracking
     public void manageTracking() {
         startedTracking = true;
 

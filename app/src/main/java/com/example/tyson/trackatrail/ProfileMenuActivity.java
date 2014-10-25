@@ -19,6 +19,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+*   Name: ProfileMenuActivity.java class
+*   Description: Profile page that lets the user view and change their personal information.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class ProfileMenuActivity extends TrackATrail {
     boolean updateValid;
     DBAdapter db;
@@ -61,6 +67,7 @@ public class ProfileMenuActivity extends TrackATrail {
         etEmail = (EditText)findViewById(R.id.editTextProfEmail);
         btnUporSub = (Button)findViewById(R.id.btnEdit);
 
+        // Set all text fields given the user data
         etUsername.setText(user.username);
         etFirstName.setText(user.firstname);
         etLastName.setText(user.lastname);

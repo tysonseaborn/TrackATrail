@@ -14,6 +14,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+*   Name: RouteManagerActivity.java class
+*   Description: Route manager functionality that displays a list view of
+*   all saved routes for the user or lets them create a new route.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
 
 public class RouteManagerActivity extends TrackATrail {
 

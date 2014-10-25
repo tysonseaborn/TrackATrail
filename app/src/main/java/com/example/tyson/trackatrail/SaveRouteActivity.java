@@ -23,6 +23,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+*   Name: SaveRouteActivity.java class
+*   Description: Save route functionality that displays the route distance after user has finished tracking.
+*   The user needs to add a name, description and category to the route before they can save it.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
 
 public class SaveRouteActivity extends TrackATrail {
 
@@ -36,6 +42,7 @@ public class SaveRouteActivity extends TrackATrail {
     String inUsername;
     double routeDistance;
 
+    // Decimal format for distance calculation
     DecimalFormat df = new DecimalFormat("#.####");
 
     @Override
@@ -45,6 +52,8 @@ public class SaveRouteActivity extends TrackATrail {
         db = new DBAdapter(this);
 
         db.open();
+
+        // Get passed in values from intent
         inUsername = getIntent().getExtras().getString("username");
         latitudes = getIntent().getExtras().getDoubleArray("latitudes");
         longitudes = getIntent().getExtras().getDoubleArray("longitudes");
@@ -63,6 +72,7 @@ public class SaveRouteActivity extends TrackATrail {
 
         db.close();
 
+        // Add up each distance based on the saved coordinates
         for (int i = 0; i < longitudes.length-1; i++) {
             Location locationA = new Location("point A");
 
@@ -84,8 +94,9 @@ public class SaveRouteActivity extends TrackATrail {
         spinnerArray.add("Cycling");
         spinnerArray.add("Roller Blading");
 
+        // Calculate route distance to km
+        // Send it to the text view
         routeDistance *= 0.001;
-
         tvDistance = (TextView)findViewById(R.id.textViewRouteDistance);
         tvDistance.setText(df.format(routeDistance) + "km");
 
@@ -125,6 +136,8 @@ public class SaveRouteActivity extends TrackATrail {
     }
 
     public void onButtonClick(View view) {
+
+        // Get values from views
         etName = (EditText)findViewById(R.id.editTextRouteName);
         etDescription = (EditText)findViewById(R.id.editTextRouteDescription);
         sItems = (Spinner)findViewById(R.id.spinnerRouteType);
@@ -136,6 +149,8 @@ public class SaveRouteActivity extends TrackATrail {
 
                 db.open();
                 Route route = new Route();
+
+                // Save user information from the view
                 route.user_ID = user.user_ID;
                 route.name = etName.getText().toString().trim();
                 route.description = etDescription.getText().toString().trim();

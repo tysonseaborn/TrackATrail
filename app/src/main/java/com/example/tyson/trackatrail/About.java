@@ -3,6 +3,12 @@ package com.example.tyson.trackatrail;
 import android.os.Bundle;
 import android.view.Menu;
 
+/*
+*   Name: About.java class
+*   Description: About activity that displays the authors names and year.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class About extends TrackATrail {
 
     @Override

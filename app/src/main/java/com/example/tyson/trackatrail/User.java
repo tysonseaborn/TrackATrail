@@ -1,6 +1,11 @@
 package com.example.tyson.trackatrail;
 
-// User class
+/*
+*   Name: User.java class
+*   Description: Houses the user database information
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class User {
     public static final String KEY_ID = "id";
     public static final String KEY_firstname = "firstname";

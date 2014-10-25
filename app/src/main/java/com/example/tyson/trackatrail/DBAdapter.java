@@ -10,7 +10,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/*
+*   Name: DBAdapter.java class
+*   Description: Database java class that stores all database queries.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 public class DBAdapter {
+
+    // Database constants
     static final String DATABASE_NAME = "TrackATrailData";
     static final String DATABASE_TABLE = "users";
     static final String DATABASE_TABLE_ROUTES = "routes";
@@ -18,7 +26,7 @@ public class DBAdapter {
     static final int DATABASE_VERSION = 1;
     static final String TAG = "DBAdapter";
 
-    // Create database sql string
+    // Create all three databases
     static final String DATABASE_CREATE =
             "create table users (id integer primary key autoincrement, "
                     + "firstname text not null, lastname text not null, username text not null unique,"
@@ -48,7 +56,7 @@ public class DBAdapter {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
-        // When creating the database new
+        // Create each database on create
         @Override
         public void onCreate(SQLiteDatabase db)
         {
@@ -61,7 +69,7 @@ public class DBAdapter {
             }
         }
 
-        // When calling an update on the database
+        // Update each database
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
         {
@@ -136,6 +144,8 @@ public class DBAdapter {
 
     // ------------------------------------------------------------------------
     // Routes Database Methods
+
+    // Insert single route
     public int insertRoute (Route route) {
         ContentValues values = new ContentValues();
         values.put(Route.KEY_USER_ID, route.user_ID);
@@ -148,18 +158,20 @@ public class DBAdapter {
         return (int) route_id;
     }
 
-    //---deletes a particular contact---
+    // Deletes a particular rout
     public boolean deleteRoute(String rowId)
     {
         return db.delete(DATABASE_TABLE_ROUTES, Route.KEY_ID + "=" + rowId, null) > 0;
     }
 
+    // Retrieve all routes for specified user
     public Cursor getAllRoutesForUser(String id)
     {
         return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_USER_ID,  Route.KEY_name, Route.KEY_description,
                 Route.KEY_type, Route.KEY_distance}, "user_ID = ?", new String[]{id}, null, null, null);
     }
 
+    // Update specific route
     public boolean updateRoute(Route route)
     {
         ContentValues values = new ContentValues();
@@ -172,6 +184,7 @@ public class DBAdapter {
         return db.update(DATABASE_TABLE_ROUTES, values, Route.KEY_ID + "=" + route.route_ID, null) > 0;
     }
 
+    // Retrieve single route
     public Route RetrieveRoute(Cursor c)
     {
         Route route = new Route();
@@ -187,6 +200,8 @@ public class DBAdapter {
 
     // ------------------------------------------------------------------------
     //Location Database Methods
+
+    // Insert single location
     public int insertLocation(RouteLocation loc) {
         ContentValues values = new ContentValues();
         values.put(RouteLocation.KEY_ROUTE_ID, loc.route_ID);
@@ -197,6 +212,7 @@ public class DBAdapter {
         return (int) route_id;
     }
 
+    // Get all locations as an array for given route id
     public RouteLocation[] getAllLocationsById(String id) {
 
         Cursor c = db.query(DATABASE_TABLE_ROUTE_LOCATIONS, new String[] {RouteLocation.KEY_ID, RouteLocation.KEY_ROUTE_ID,

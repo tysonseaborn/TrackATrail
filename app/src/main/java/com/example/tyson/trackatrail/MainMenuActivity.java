@@ -9,6 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+/*
+*   Name: MainMenuActivity.java class
+*   Description: Main menu that the user is taken to after registering or signing in.
+*   Authors: Becky Harris, Werner Uetz and Tyson Seaborn
+*/
+
 
 public class MainMenuActivity extends TrackATrail {
     User user;
@@ -25,6 +31,8 @@ public class MainMenuActivity extends TrackATrail {
         inUsername = getIntent().getExtras().getString("username");
 
         Cursor c = db.getAllUsers();
+
+        // Loop through user cursor to find specific user
         if (c.moveToFirst()) {
             do {
                 User dbUser = db.RetrieveUser(c);
@@ -77,6 +85,7 @@ public class MainMenuActivity extends TrackATrail {
                 startActivity(iProfile);
                 break;
             case R.id.btnMyRoutes:
+                // Pass in user to the route manager
                 Intent iRoutes = new Intent(this, RouteManagerActivity.class);
                 iRoutes.putExtra("username", inUsername);
                 startActivity(iRoutes);
