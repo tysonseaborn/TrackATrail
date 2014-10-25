@@ -130,14 +130,23 @@
                     android:layout_height="fill_parent">
 
                     <Button
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/editroute"
                             android:id="@+id/btnEditRoute"
                             android:onClick="onButtonClick"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
+                            android:layout_alignParentStart="true"
+                        android:layout_weight=".5" />
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/deleteroute"
+                        android:id="@+id/btnDeleteRoute"
+                        android:layout_weight=".5"
+                        android:onClick="onButtonClick" />
                 </LinearLayout>
 
             </LinearLayout>

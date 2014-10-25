@@ -150,16 +150,9 @@ public class DBAdapter {
     }
 
     //---deletes a particular contact---
-    public boolean deleteRoute(long rowId)
+    public boolean deleteRoute(String rowId)
     {
         return db.delete(DATABASE_TABLE_ROUTES, Route.KEY_ID + "=" + rowId, null) > 0;
-    }
-
-    //---retrieves all the routes---
-    public Cursor getAllRoutes()
-    {
-        return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_USER_ID, Route.KEY_name, Route.KEY_description,
-                Route.KEY_type, Route.KEY_distance}, null, null, null, null, null);
     }
 
     public Cursor getAllRoutesForUser(String id)

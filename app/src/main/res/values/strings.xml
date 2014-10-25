@@ -62,4 +62,5 @@
     <string name="editroutetitle">Title:</string>
     <string name="editroutedescription">Description:</string>
     <string name="editroutedistancetitle">Distance:</string>
+    <string name="deleteroute">Delete Route</string>
 </resources>

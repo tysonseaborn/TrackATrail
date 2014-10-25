@@ -34,10 +34,11 @@
         //Google Maps API
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBfwJDvI8R-Gilqy4xbdCEFNeYfXwKoM6g"/>
+            android:value="AIzaSyCg4b-ecsrVZM7Qt8zlrxsn2eNSJjmsdI8"/>
 
         <!-- Mike Key - AIzaSyCRlZbiE2miUYWAqEf9aEvrGeqcAApoqS4 -->
         <!-- Tyson Key - AIzaSyBfwJDvI8R-Gilqy4xbdCEFNeYfXwKoM6g -->
+        <!-- Becky Key - AIzaSyCg4b-ecsrVZM7Qt8zlrxsn2eNSJjmsdI8 -->
 
         <activity
             android:name=".TrackATrail"

@@ -3,6 +3,8 @@ package com.example.tyson.trackatrail;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.location.Location;
@@ -35,7 +37,7 @@ import java.util.List;
 
 public class SavedRouteActivity extends TrackATrail {
     Button btnEdit;
-    boolean updateValid;
+    boolean updateValid, deleteValid, isUpdate;
     User user;
     Route route;
     Spinner sItems;
@@ -56,8 +58,11 @@ public class SavedRouteActivity extends TrackATrail {
         tvDistance = (TextView)findViewById(R.id.textViewDistance);
         btnEdit = (Button)findViewById(R.id.btnEditRoute);
         sItems = (Spinner) findViewById(R.id.spinnerEditRouteType);
+        tvDistance = (TextView)findViewById(R.id.textViewDistance);
 
         updateValid = false;
+        deleteValid = false;
+        isUpdate = false;
 
         // Get the username of the current logged in user and route name
         inRouteName = getIntent().getExtras().getString("routeName");
@@ -107,6 +112,7 @@ public class SavedRouteActivity extends TrackATrail {
         tvDistance.setText(route.distance + "km");
         etRouteDesc.setText(route.description);
         sItems.setSelection(adapter.getPosition(route.type));
+        tvDistance.setText(route.distance);
 
         etRouteName.setEnabled(false);
         etRouteDesc.setEnabled(false);
@@ -154,32 +160,85 @@ public class SavedRouteActivity extends TrackATrail {
     }
 
     public void onButtonClick(View view) {
-        // User wants to edit their route information
-        if(btnEdit.getText().toString().equals("Edit Route Info")) {
-            // Set the route information to be editable
-            etRouteName.setEnabled(true);
-            etRouteDesc.setEnabled(true);
-            sItems.setClickable(true);
+        switch(view.getId()) {
+            case R.id.btnDeleteRoute:
+                DialogInterface.OnClickListener deleteRouteListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                isUpdate = false;
+                                popup();
+                                break;
 
-            // Distinguishes between the action the user wants to do
-            // User is in the process of editing - submit button
-            btnEdit.setText("Submit");
-        }
-        else {
-            boolean routeInfoValid = true;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                // Nothing happens
+                                break;
+                        }
+                    }
+                };
 
-            if(etRouteName.getText().toString().equals("") ||
-                    etRouteDesc.getText().toString().equals("")) {
-                // A field is empty
-                Toast.makeText(this,"Please enter data in all fields",Toast.LENGTH_SHORT).show();
-                routeInfoValid = false;
-            }
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure you want to delete this route?");
+                builder.setPositiveButton("Yes", deleteRouteListener);
+                builder.setNegativeButton("No", deleteRouteListener);
+                builder.setIcon(R.drawable.ic_launcher);
+                builder.show();
 
-            if(routeInfoValid) {
-                popup();
-            }
+                break;
+            case R.id.btnEditRoute:
+                // User wants to edit their route information
+                if(btnEdit.getText().toString().equals("Edit Route Info")) {
+                    // Set the route information to be editable
+                    etRouteName.setEnabled(true);
+                    etRouteDesc.setEnabled(true);
+                    sItems.setClickable(true);
+
+                    // Distinguishes between the action the user wants to do
+                    // User is in the process of editing - submit button
+                    btnEdit.setText("Submit");
+                }
+                else {
+                    boolean routeInfoValid = true;
+
+                    if(etRouteName.getText().toString().equals("") ||
+                            etRouteDesc.getText().toString().equals("")) {
+                        // A field is empty
+                        Toast.makeText(this,"Please enter data in all fields",Toast.LENGTH_SHORT).show();
+                        routeInfoValid = false;
+                    }
+
+                    if(routeInfoValid) {
+                        isUpdate = true;
+                        popup();
+                    }
+                }
+                break;
         }
     }
+
+    // Delete the route if all checks are valid
+    private void deleteRoute() {
+        if(deleteValid) { // Validated password
+            // Update the user in the database
+            db.open();
+            db.deleteRoute(route.route_ID);
+            db.close();
+
+            // Return to route manager
+            Intent i = new Intent(this, RouteManagerActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("username", inUsername);
+            startActivity(i);
+
+            // Display message notifying user the update has completed
+            Toast.makeText(this, "Route " + route.name + " deleted",Toast.LENGTH_LONG).show();
+
+            deleteValid = false;
+            finish();
+        }
+    }
+
 
     // Update the route if all checks are valid
     private void updateRoute() {
@@ -279,14 +338,25 @@ public class SavedRouteActivity extends TrackATrail {
                     // Password is valid to the user's password
                     if(etPass1.getText().toString().equals(user.password)) {
                         // Update the user and close the pop up
-                        updateValid = true;
-                        updateRoute();
+                        if(isUpdate == true) {
+                            updateValid = true;
+                            updateRoute();
+                        }
+                        else {
+                            deleteValid = true;
+                            deleteRoute();
+                        }
                         alertDialog.dismiss();
                         return;
                     }
                     else {
                         // Password is not the user's password
-                        updateValid = false;
+                        if(isUpdate == true) {
+                            updateValid = false;
+                        }
+                        else {
+                            deleteValid = false;
+                        }
                         tvPassMatch.setText("Invalid password");
                         return;
                     }
@@ -310,6 +380,7 @@ public class SavedRouteActivity extends TrackATrail {
             @Override
             public void onClick(View v) {
                 updateValid = false;
+                deleteValid = false;
                 alertDialog.dismiss();
             }
         });
