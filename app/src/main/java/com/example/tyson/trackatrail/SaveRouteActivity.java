@@ -1,11 +1,9 @@
 package com.example.tyson.trackatrail;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,23 +13,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +94,34 @@ public class SaveRouteActivity extends TrackATrail {
         sItems = (Spinner) findViewById(R.id.spinnerRouteType);
         sItems.setAdapter(adapter);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.register, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            openMenu("about");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Open the selected menu item
+    public void openMenu(String menuItem) {
+        if(menuItem.equals("about")) {
+            Intent about = new Intent(this, About.class);
+            startActivity(about);
+        }
     }
 
     public void onButtonClick(View view) {
@@ -194,75 +209,4 @@ public class SaveRouteActivity extends TrackATrail {
         inputStream.close();
         outputStream.close();
     }
-
-    private double getDistance(double origin1, double origin2, double dest1, double dest2) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Double dist = 0.0;
-        try {
-
-            String url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin1 + "," + origin2 + "&destination=" + dest1 + "," + dest2 + "&mode=walking";
-
-            HttpPost httppost = new HttpPost(url);
-
-            HttpClient client = new DefaultHttpClient();
-            HttpResponse response;
-            stringBuilder = new StringBuilder();
-
-
-            response = client.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            InputStream stream = entity.getContent();
-            int b;
-            while ((b = stream.read()) != -1) {
-                stringBuilder.append((char) b);
-            }
-        } catch (ClientProtocolException e) {
-        } catch (IOException e) {
-        }
-
-        JSONObject jsonObject;
-        try {
-
-            jsonObject = new JSONObject(stringBuilder.toString());
-
-            JSONArray array = jsonObject.getJSONArray("routes");
-
-            JSONObject routes = array.getJSONObject(0);
-
-            JSONArray legs = routes.getJSONArray("legs");
-
-            JSONObject steps = legs.getJSONObject(0);
-
-            JSONObject distance = steps.getJSONObject("distance");
-
-            Log.i("Distance:", distance.toString());
-            dist = Double.parseDouble(distance.getString("text").replaceAll("[^\\.0123456789]","") );
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return dist;
-    }
-
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.save_route, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

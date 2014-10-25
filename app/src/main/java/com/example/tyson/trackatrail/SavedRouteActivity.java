@@ -1,13 +1,11 @@
 package com.example.tyson.trackatrail;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,13 +21,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -96,7 +92,7 @@ public class SavedRouteActivity extends TrackATrail {
             } while(c.moveToNext());
         }
 
-        Cursor routeCursor = db.getAllRoutesForUser(user.user_ID.toString());
+        Cursor routeCursor = db.getAllRoutesForUser(user.user_ID);
         if (routeCursor.moveToFirst()) {
             do {
                 Route refRoute = db.RetrieveRoute(routeCursor);
@@ -124,6 +120,34 @@ public class SavedRouteActivity extends TrackATrail {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.register, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            openMenu("about");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Open the selected menu item
+    public void openMenu(String menuItem) {
+        if(menuItem.equals("about")) {
+            Intent about = new Intent(this, About.class);
+            startActivity(about);
+        }
+    }
+
     public void initMap(RouteLocation[] rlArray) {
         // Initializing
         // Getting reference to SupportMapFragment of the activity_main
@@ -147,7 +171,7 @@ public class SavedRouteActivity extends TrackATrail {
                             .add(new LatLng(rlArray[i].latitude, rlArray[i].longitude),
                                     new LatLng(rlArray[i + 1].latitude, rlArray[i + 1].longitude))
                             .width(5)
-                            .color(Color.MAGENTA).geodesic(true));
+                            .color(Color.RED).geodesic(true));
                 }
             }
             map.addMarker(new MarkerOptions().position(
@@ -344,7 +368,7 @@ public class SavedRouteActivity extends TrackATrail {
                     // Password is valid to the user's password
                     if(etPass1.getText().toString().equals(user.password)) {
                         // Update the user and close the pop up
-                        if(isUpdate == true) {
+                        if(isUpdate) {
                             updateValid = true;
                             updateRoute();
                         }
@@ -353,18 +377,16 @@ public class SavedRouteActivity extends TrackATrail {
                             deleteRoute();
                         }
                         alertDialog.dismiss();
-                        return;
                     }
                     else {
                         // Password is not the user's password
-                        if(isUpdate == true) {
+                        if(isUpdate) {
                             updateValid = false;
                         }
                         else {
                             deleteValid = false;
                         }
                         tvPassMatch.setText("Invalid password");
-                        return;
                     }
                 }
                 else {
@@ -374,7 +396,6 @@ public class SavedRouteActivity extends TrackATrail {
                     } else { // Passwords entered are not the same
                         tvPassMatch.setText(R.string.passnomatch);
                     }
-                    return;
                 }
 
             }

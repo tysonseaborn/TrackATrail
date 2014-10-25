@@ -1,7 +1,6 @@
 package com.example.tyson.trackatrail;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -189,14 +187,14 @@ public class StartRouteActivity  extends TrackATrail implements
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()), 18));
 
-        if (currentlyTracking == true) {
+        if (currentlyTracking) {
             locationArray.add(mCurrentLocation);
             if (locationArray.size() > 2) {
                 map.addPolyline(new PolylineOptions()
                         .add(new LatLng(locationArray.get(locationArray.size()-2).getLatitude(), locationArray.get(locationArray.size()-2).getLongitude()),
                                 new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()))
                         .width(5)
-                        .color(Color.MAGENTA).geodesic(true));
+                        .color(Color.RED).geodesic(true));
             }
         }
     }

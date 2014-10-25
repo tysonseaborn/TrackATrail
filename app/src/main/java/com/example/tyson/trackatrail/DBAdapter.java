@@ -137,7 +137,6 @@ public class DBAdapter {
     // ------------------------------------------------------------------------
     // Routes Database Methods
     public int insertRoute (Route route) {
-        //SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Route.KEY_USER_ID, route.user_ID);
         values.put(Route.KEY_name, route.name);
