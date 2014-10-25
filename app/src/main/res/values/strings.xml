@@ -42,6 +42,7 @@
     <string name="myprofile">Profile</string>
     <string name="myroutes">My Routes</string>
     <string name="mysettings">Settings</string>
+    <string name="myabout">About</string>
     <string name="title_activity_profile_menu">Profile</string>
 
     <!-- Password Popup strings -->

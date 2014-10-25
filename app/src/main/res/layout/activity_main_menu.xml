@@ -24,7 +24,7 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/myprofile"
         android:id="@+id/btnProfile"
@@ -36,7 +36,7 @@
         android:layout_alignStart="@+id/btnMyRoutes" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/myroutes"
         android:id="@+id/btnMyRoutes"
@@ -47,8 +47,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mysettings"
-        android:id="@+id/btnSettings"
+        android:text="@string/myabout"
+        android:id="@+id/btnAbout"
         android:singleLine="false"
         android:layout_below="@+id/btnMyRoutes"
         android:layout_alignLeft="@+id/btnMyRoutes"

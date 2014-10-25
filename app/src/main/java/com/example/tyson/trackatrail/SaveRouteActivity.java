@@ -48,9 +48,6 @@ public class SaveRouteActivity extends TrackATrail {
     double[] longitudes;
     String inUsername;
     double routeDistance;
-    double pointOne;
-    double pointTwo;
-    double longitude;
 
     DecimalFormat df = new DecimalFormat("#.####");
 
@@ -80,11 +77,6 @@ public class SaveRouteActivity extends TrackATrail {
         db.close();
 
         for (int i = 0; i < longitudes.length-1; i++) {
-//            pointOne = 90 - latitudes[i];
-//            pointTwo = 90 - latitudes[i+1];
-//            longitude = longitudes[i] - longitudes[i+1];
-
-            //routeDistance += ((Math.cos(pointOne)*Math.cos(pointTwo)) + (Math.sin(pointOne)*Math.sin(pointTwo)*Math.sin(longitude)));
             Location locationA = new Location("point A");
 
             locationA.setLatitude(latitudes[i]);

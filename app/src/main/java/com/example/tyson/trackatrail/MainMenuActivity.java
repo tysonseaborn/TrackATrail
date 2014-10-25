@@ -81,8 +81,9 @@ public class MainMenuActivity extends TrackATrail {
                 iRoutes.putExtra("username", inUsername);
                 startActivity(iRoutes);
                 break;
-            case R.id.btnSettings:
-                Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
+            case R.id.btnAbout:
+                Intent iAbout = new Intent(this, About.class);
+                startActivity(iAbout);
                 break;
         }
     }
