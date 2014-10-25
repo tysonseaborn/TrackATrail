@@ -137,7 +137,7 @@ public class SavedRouteActivity extends TrackATrail {
             // Enable MyLocation Button in the Map
             map.setMyLocationEnabled(false);
             map.getUiSettings().setAllGesturesEnabled(false);
-            map.getUiSettings().setZoomControlsEnabled(false);
+            map.getUiSettings().setZoomControlsEnabled(true);
 
             map.addMarker(new MarkerOptions().position(
                     new LatLng(rlArray[0].latitude, rlArray[0].longitude)).icon(
