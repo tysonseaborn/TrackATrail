@@ -39,14 +39,14 @@ public class StartRouteActivity  extends TrackATrail implements
     GoogleMap map;
 
     private static final int MILLISECONDS_PER_SECOND = 1000;
-    public static final int UPDATE_INTERVAL_IN_SECONDS = 5;
+    public static final int UPDATE_INTERVAL_IN_SECONDS = 2;
     private static final long UPDATE_INTERVAL =
             MILLISECONDS_PER_SECOND * UPDATE_INTERVAL_IN_SECONDS;
     private static final int FASTEST_INTERVAL_IN_SECONDS = 1;
     private static final long FASTEST_INTERVAL =
             MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
     private static final float DISPLACEMENT_DISTANCE =
-            5.0f;
+            2.0f;
 
     LocationRequest mLocationRequest;
     LocationClient mLocationClient;

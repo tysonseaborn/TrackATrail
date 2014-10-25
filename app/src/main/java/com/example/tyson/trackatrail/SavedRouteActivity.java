@@ -41,6 +41,7 @@ public class SavedRouteActivity extends TrackATrail {
     Spinner sItems;
     String inUsername, inRouteName;
     EditText etRouteName, etRouteDesc;
+    TextView tvDistance;
 
     //Map Properties
     GoogleMap map;
@@ -52,6 +53,7 @@ public class SavedRouteActivity extends TrackATrail {
 
         etRouteName = (EditText)findViewById(R.id.etRouteTitle);
         etRouteDesc = (EditText)findViewById(R.id.editTextSavedRouteDesc);
+        tvDistance = (TextView)findViewById(R.id.textViewDistance);
         btnEdit = (Button)findViewById(R.id.btnEditRoute);
         sItems = (Spinner) findViewById(R.id.spinnerEditRouteType);
 
@@ -102,6 +104,7 @@ public class SavedRouteActivity extends TrackATrail {
         // Set all the edit text fields to be the route's information
         // Disable on start so user cannot edit unless they choose to
         etRouteName.setText(route.name);
+        tvDistance.setText(route.distance + "km");
         etRouteDesc.setText(route.description);
         sItems.setSelection(adapter.getPosition(route.type));
 

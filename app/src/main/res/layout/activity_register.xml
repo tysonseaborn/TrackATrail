@@ -124,15 +124,16 @@
                 android:layout_width="20dp"
                 android:layout_height="100dp" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/signup"
+                android:id="@+id/btnSignUp"
+                android:onClick="onButtonClick" />
+
         </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/signup"
-            android:id="@+id/btnSignUp"
-            android:onClick="onButtonClick" />
     </LinearLayout>
 
 </RelativeLayout>

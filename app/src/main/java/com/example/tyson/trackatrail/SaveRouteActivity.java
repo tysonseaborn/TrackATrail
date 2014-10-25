@@ -52,7 +52,7 @@ public class SaveRouteActivity extends TrackATrail {
     double pointTwo;
     double longitude;
 
-    DecimalFormat df = new DecimalFormat("#.##");
+    DecimalFormat df = new DecimalFormat("#.####");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +80,22 @@ public class SaveRouteActivity extends TrackATrail {
         db.close();
 
         for (int i = 0; i < longitudes.length-1; i++) {
-            pointOne = 90 - latitudes[i];
-            pointTwo = 90 - latitudes[i+1];
-            longitude = longitudes[i] - longitudes[i+1];
+//            pointOne = 90 - latitudes[i];
+//            pointTwo = 90 - latitudes[i+1];
+//            longitude = longitudes[i] - longitudes[i+1];
 
-            routeDistance += ((Math.cos(pointOne)*Math.cos(pointTwo)) + (Math.sin(pointOne)*Math.sin(pointTwo)*Math.sin(longitude)));
+            //routeDistance += ((Math.cos(pointOne)*Math.cos(pointTwo)) + (Math.sin(pointOne)*Math.sin(pointTwo)*Math.sin(longitude)));
+            Location locationA = new Location("point A");
+
+            locationA.setLatitude(latitudes[i]);
+            locationA.setLongitude(longitudes[i]);
+
+            Location locationB = new Location("point B");
+
+            locationB.setLatitude(latitudes[i+1]);
+            locationB.setLongitude(longitudes[i+1]);
+
+            routeDistance += locationA.distanceTo(locationB);
         }
 
         // you need to have a list of data that you want the spinner to display
@@ -94,7 +105,7 @@ public class SaveRouteActivity extends TrackATrail {
         spinnerArray.add("Cycling");
         spinnerArray.add("Roller Blading");
 
-        routeDistance = Math.cos(routeDistance) / 100;
+        routeDistance *= 0.001;
 
         tvDistance = (TextView)findViewById(R.id.textViewRouteDistance);
         tvDistance.setText(df.format(routeDistance) + "km");
@@ -122,7 +133,7 @@ public class SaveRouteActivity extends TrackATrail {
                 route.name = etName.getText().toString().trim();
                 route.description = etDescription.getText().toString().trim();
                 route.type = sItems.getSelectedItem().toString();
-                route.distance = String.valueOf(routeDistance);
+                route.distance = df.format(routeDistance);
                 int id = db.insertRoute(route);
                 route.route_ID = String.valueOf(id);
                 db.close();
@@ -142,7 +153,7 @@ public class SaveRouteActivity extends TrackATrail {
                 }
 
                 if (id < 0 ) {
-                    Toast.makeText(this, "Route not added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Route name already exists", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(this, "Route " + route.name + " added", Toast.LENGTH_SHORT).show();

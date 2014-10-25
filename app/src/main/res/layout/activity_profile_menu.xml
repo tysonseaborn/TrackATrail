@@ -119,15 +119,16 @@
                     android:layout_width="20dp"
                     android:layout_height="40dp" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/update"
+                    android:id="@+id/btnEdit"
+                    android:onClick="onButtonClick" />
+
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/update"
-            android:id="@+id/btnEdit"
-            android:onClick="onButtonClick" />
     </LinearLayout>
 
 </RelativeLayout>

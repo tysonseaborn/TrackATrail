@@ -164,10 +164,8 @@ public class DBAdapter {
 
     public Cursor getAllRoutesForUser(String id)
     {
-        String whereClause = "user_ID = ?";
-
         return db.query(DATABASE_TABLE_ROUTES, new String[] {Route.KEY_ID, Route.KEY_USER_ID,  Route.KEY_name, Route.KEY_description,
-                Route.KEY_type, Route.KEY_distance}, whereClause, new String[]{id}, null, null, null);
+                Route.KEY_type, Route.KEY_distance}, "user_ID = ?", new String[]{id}, null, null, null);
     }
 
     public boolean updateRoute(Route route)
@@ -210,7 +208,7 @@ public class DBAdapter {
     public RouteLocation[] getAllLocationsById(String id) {
 
         Cursor c = db.query(DATABASE_TABLE_ROUTE_LOCATIONS, new String[] {RouteLocation.KEY_ID, RouteLocation.KEY_ROUTE_ID,
-        RouteLocation.KEY_lat, RouteLocation.KEY_long}, null, null, null, null, null);
+        RouteLocation.KEY_lat, RouteLocation.KEY_long}, "route_ID = ?", new String[]{id}, null, null, null);
         ArrayList<RouteLocation> rlList = new ArrayList<RouteLocation>();
 
         if (c.moveToFirst()) {

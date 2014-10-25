@@ -52,6 +52,10 @@
                     android:layout_weight="0.5"
                     class="com.google.android.gms.maps.SupportMapFragment" />
 
+                <Space
+                    android:layout_width="20px"
+                    android:layout_height="20px" />
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
@@ -59,15 +63,14 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
                         android:text="@string/editroutecategory"
                         android:id="@+id/textView"
-                        android:textSize="20dp"
-                        android:layout_weight="0.50" />
+                        android:textSize="20dp" />
 
                     <Spinner
-                        android:layout_width="204dp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/spinnerEditRouteType" />
                 </LinearLayout>
@@ -79,50 +82,65 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="fill_parent"
                         android:text="@string/editroutedistancetitle"
                         android:id="@+id/textViewDistTitle"
-                        android:textSize="20dp"
-                        android:layout_weight="0.50" />
+                        android:textSize="20dp" />
 
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text=""
                         android:id="@+id/textViewDistance"
                         android:hint="Distance"
                         android:textSize="20dp"
-                        android:layout_weight="0.50" />
+                        android:layout_marginLeft="10dp" />
 
                 </LinearLayout>
-                <TextView
-                    android:layout_width="139dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/editroutedescription"
-                    android:id="@+id/textView2"
-                    android:textSize="20dp" />
 
-                <EditText
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editTextSavedRouteDesc"
-                    android:inputType="textCapSentences"
-                    android:lines="5"
-                    android:maxLength="250"
-                    android:textSize="25dp"
-                    android:textColor="#ffffffff"
-                    android:hint="Description of saved route."/>
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editroutedescription"
+                        android:id="@+id/textView2"
+                        android:textSize="20dp" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextSavedRouteDesc"
+                        android:inputType="textCapSentences"
+                        android:lines="5"
+                        android:maxLength="250"
+                        android:textSize="20dp"
+                        android:textColor="#ffffffff"
+                        android:hint="Description of saved route."/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/editroute"
+                            android:id="@+id/btnEditRoute"
+                            android:onClick="onButtonClick"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/editroute"
-            android:id="@+id/btnEditRoute"
-            android:onClick="onButtonClick" />
 
 </RelativeLayout>
