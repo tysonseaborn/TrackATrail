@@ -148,6 +148,7 @@ public class SavedRouteActivity extends TrackATrail {
         }
     }
 
+    //Initializes the Google map fragment and populates it with markers and points
     public void initMap(RouteLocation[] rlArray) {
         // Initializing
         // Getting reference to SupportMapFragment of the activity_main

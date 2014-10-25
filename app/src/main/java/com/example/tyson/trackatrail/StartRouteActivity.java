@@ -84,6 +84,7 @@ public class StartRouteActivity  extends TrackATrail implements
         btnSave = (Button)findViewById(R.id.buttonSaveRoute);
     }
 
+    //Initializes the Google map fragment pointing at the user's current location. Also enables the Location Requests
     private void initMap() {
         // Initializing
         // Getting reference to SupportMapFragment of the activity_main
@@ -147,6 +148,7 @@ public class StartRouteActivity  extends TrackATrail implements
         super.onStart();
         // 1. connect the client.
         mLocationClient.connect();
+        Toast.makeText(this, "Connection established to the Google server.", Toast.LENGTH_LONG);
     }
 
     @Override
@@ -172,12 +174,12 @@ public class StartRouteActivity  extends TrackATrail implements
 
     @Override
     public void onDisconnected() {
-
+        Toast.makeText(this, "You have disconnected from the Google server.", Toast.LENGTH_LONG);
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
+        Toast.makeText(this, "Error: Cannot connect to Google server.", Toast.LENGTH_LONG);
     }
 
     @Override
@@ -233,6 +235,7 @@ public class StartRouteActivity  extends TrackATrail implements
         startedTracking = true;
 
         if(btnStart.getText().equals("Start Tracking")) {
+            Toast.makeText(this, "Track recording in progress!", Toast.LENGTH_LONG);
             map.addMarker(new MarkerOptions().position(
                     new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude())).icon(
             BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
@@ -241,6 +244,7 @@ public class StartRouteActivity  extends TrackATrail implements
             currentlyTracking = true;
         }
         else {
+            Toast.makeText(this, "Track recording ended! ", Toast.LENGTH_LONG);
             btnStart.setText("Start Tracking");
             btnSave.setEnabled(true);
             currentlyTracking = false;
