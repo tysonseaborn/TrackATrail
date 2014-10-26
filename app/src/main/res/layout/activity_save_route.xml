@@ -116,15 +116,15 @@
                 <Space
                     android:layout_width="20px"
                     android:layout_height="30dp" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/routeSave"
+                    android:id="@+id/button"
+                    android:onClick="onButtonClick" />
             </LinearLayout>
         </ScrollView>
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/routeSave"
-            android:id="@+id/button"
-            android:onClick="onButtonClick" />
 
     </LinearLayout>
 

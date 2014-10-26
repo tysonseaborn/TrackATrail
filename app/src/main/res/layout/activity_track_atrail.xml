@@ -29,8 +29,7 @@
         android:gravity="center"
         android:layout_above="@+id/imageViewMainMenu"
         android:layout_alignLeft="@+id/usernameInput"
-        android:layout_alignStart="@+id/usernameInput"
-        android:layout_marginBottom="20dp" />
+        android:layout_alignStart="@+id/usernameInput" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -66,7 +65,6 @@
         android:layout_alignEnd="@+id/passwordInput"
         android:layout_alignLeft="@+id/passwordInput"
         android:layout_alignStart="@+id/passwordInput"
-        android:layout_marginTop="20dp"
         android:textSize="20dp" />
 
 </RelativeLayout>
